@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================================================
-  // Contact Form Submission & Feedback
+  // Contact Form Submission & Feedback (Web3Forms API Integration)
   // ==========================================================================
   const contactForm = document.getElementById('growth-contact-form');
   const formSuccess = document.getElementById('form-success');
@@ -120,20 +120,46 @@ document.addEventListener('DOMContentLoaded', () => {
       // Show submitting state
       submitBtn.classList.add('submitting');
       submitBtn.disabled = true;
-      submitBtn.querySelector('span').textContent = 'Transmitting...';
+      const btnText = submitBtn.querySelector('span');
+      const originalText = btnText.textContent;
+      btnText.textContent = 'Transmitting...';
 
-      // Simulate network request duration
-      setTimeout(() => {
-        // Fade out form
-        contactForm.style.opacity = '0';
-        contactForm.style.transform = 'translateY(-20px)';
+      const formData = new FormData(contactForm);
+      
+      // Access Key for Web3Forms (Replace with your actual key from https://web3forms.com)
+      const accessKey = "d46f63c7-3d23-48d2-86ad-c9a2169f0ea4";
+      formData.append("access_key", accessKey);
+      formData.append("subject", "New Lead from Growth Beacon");
 
-        setTimeout(() => {
-          contactForm.style.display = 'none';
-          formSuccess.classList.add('active');
-        }, 400);
-
-      }, 1500);
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      })
+      .then(async (response) => {
+        let json = await response.json();
+        if (response.status === 200) {
+          // Fade out form and display custom styling success block
+          contactForm.style.opacity = '0';
+          contactForm.style.transform = 'translateY(-20px)';
+          setTimeout(() => {
+            contactForm.style.display = 'none';
+            formSuccess.classList.add('active');
+          }, 400);
+        } else {
+          console.error(json);
+          alert(json.message || "An error occurred. Please try again.");
+          btnText.textContent = originalText;
+          submitBtn.classList.remove('submitting');
+          submitBtn.disabled = false;
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Network error. Please check your connection and try again.");
+        btnText.textContent = originalText;
+        submitBtn.classList.remove('submitting');
+        submitBtn.disabled = false;
+      });
     });
   }
 
