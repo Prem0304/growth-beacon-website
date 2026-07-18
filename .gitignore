@@ -1,0 +1,9 @@
+# OS metadata files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# System files
+.system_generated/
