@@ -1,0 +1,1159 @@
+/* ==========================================================================
+   Growth Beacon CRM CSS Design System
+   ========================================================================== */
+:root {
+  --bg-dark: #070B19;
+  --bg-dark-accent: #0C1125;
+  --bg-card: rgba(16, 24, 48, 0.55);
+  --bg-card-hover: rgba(22, 34, 68, 0.7);
+  --border-color: rgba(0, 240, 255, 0.15);
+  --border-color-hover: rgba(0, 240, 255, 0.45);
+  
+  --color-text-main: #E2E8F0;
+  --color-text-muted: #94A3B8;
+  --color-white: #FFFFFF;
+  
+  --cyan-glow: #00F0FF;
+  --blue-primary: #0072FF;
+  --gold-accent: #F2C94C;
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  --cyan-glow-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+  
+  /* Status Colors */
+  --status-new: #00D2FF;
+  --status-contacted: #F2C94C;
+  --status-audit: #B19ffb;
+  --status-proposal: #F2994A;
+  --status-won: #27C93F;
+  --status-lost: #FF4A4A;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-dark);
+  background-image: radial-gradient(circle at 10% 20%, rgba(12, 17, 37, 0.8) 0%, rgba(7, 11, 25, 1) 90%);
+  color: var(--color-text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Login Interface
+   ========================================================================== */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.login-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 3.5rem 2.5rem;
+  width: 100%;
+  max-width: 440px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--glass-shadow), var(--cyan-glow-shadow);
+  text-align: center;
+}
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 2.5rem;
+  text-decoration: none;
+}
+
+.login-logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.login-logo span {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--color-white);
+  letter-spacing: 0.05em;
+}
+
+.login-logo span span {
+  color: var(--cyan-glow);
+}
+
+.login-box h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 0.5rem;
+}
+
+.login-box p {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 2.5rem;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.form-group input {
+  width: 100%;
+  background: rgba(7, 11, 25, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 14px 16px;
+  color: var(--color-white);
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: var(--cyan-glow);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.25);
+}
+
+.btn-primary {
+  width: 100%;
+  background: var(--gradient-blue);
+  background: linear-gradient(135deg, var(--blue-primary), var(--cyan-glow));
+  color: var(--bg-dark);
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 240, 255, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 240, 255, 0.4);
+}
+
+.login-error {
+  color: var(--status-lost);
+  font-size: 0.85rem;
+  margin-top: 1rem;
+  display: none;
+}
+
+/* ==========================================================================
+   Dashboard Panel Layout
+   ========================================================================== */
+.crm-layout {
+  display: flex;
+  min-height: 100vh;
+  display: none; /* Shown after auth */
+}
+
+/* Sidebar Navigation */
+.crm-sidebar {
+  width: 260px;
+  background: rgba(10, 15, 30, 0.95);
+  border-right: 1px solid var(--border-color);
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 3.5rem;
+  padding-left: 0.5rem;
+}
+
+.sidebar-brand img {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+}
+
+.sidebar-brand span {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--color-white);
+  letter-spacing: 0.05em;
+}
+
+.sidebar-brand span span {
+  color: var(--cyan-glow);
+}
+
+.sidebar-menu {
+  list-style: none;
+}
+
+.sidebar-menu li {
+  margin-bottom: 0.75rem;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.sidebar-link:hover, .sidebar-link.active {
+  color: var(--color-white);
+  background: rgba(0, 240, 255, 0.08);
+  border-left: 3px solid var(--cyan-glow);
+}
+
+.sidebar-link svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+}
+
+/* Main Dashboard Panel */
+.crm-main {
+  flex-grow: 1;
+  padding: 3rem 4rem;
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.panel-title h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-white);
+}
+
+.panel-title p {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+}
+
+/* Summary Grid cards */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.75rem;
+  margin-bottom: 3.5rem;
+}
+
+.summary-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.75rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.summary-card:hover {
+  border-color: var(--border-color-hover);
+  transform: translateY(-3px);
+}
+
+.card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 240, 255, 0.08);
+  color: var(--cyan-glow);
+  flex-shrink: 0;
+}
+
+.card-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+}
+
+.card-info span {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.card-info h3 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-white);
+  margin-top: 0.25rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ==========================================================================
+   Sections and Controls
+   ========================================================================== */
+.crm-section {
+  display: none; /* Toggle visible via script */
+}
+
+.crm-section.active {
+  display: block;
+}
+
+/* Dashboard Filter Bar */
+.control-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.search-box {
+  position: relative;
+  max-width: 320px;
+  width: 100%;
+}
+
+.search-box input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px 16px 10px 40px;
+  color: var(--color-white);
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.search-box svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--color-text-muted);
+}
+
+.filter-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.select-filter {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: var(--color-text-main);
+  outline: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.select-filter option {
+  background: var(--bg-dark-accent);
+  color: var(--color-text-main);
+}
+
+/* Color-coded select statuses */
+.select-filter.delivery-green {
+  background: rgba(39, 201, 63, 0.08) !important;
+  color: var(--status-won) !important;
+  border-color: rgba(39, 201, 63, 0.3) !important;
+  font-weight: 600;
+}
+
+.select-filter.delivery-yellow {
+  background: rgba(242, 201, 76, 0.08) !important;
+  color: var(--status-contacted) !important;
+  border-color: rgba(242, 201, 76, 0.3) !important;
+  font-weight: 600;
+}
+
+.select-filter.delivery-orange {
+  background: rgba(242, 153, 74, 0.08) !important;
+  color: var(--status-proposal) !important;
+  border-color: rgba(242, 153, 74, 0.3) !important;
+  font-weight: 600;
+}
+
+.select-filter.delivery-red {
+  background: rgba(255, 74, 74, 0.08) !important;
+  color: var(--status-lost) !important;
+  border-color: rgba(255, 74, 74, 0.3) !important;
+  font-weight: 600;
+}
+
+.select-filter.delivery-blue {
+  background: rgba(0, 210, 255, 0.08) !important;
+  color: var(--status-new) !important;
+  border-color: rgba(0, 210, 255, 0.3) !important;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Data Table Section
+   ========================================================================== */
+.table-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.crm-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.crm-table th, .crm-table td {
+  padding: 16px 24px;
+  font-size: 0.9rem;
+}
+
+.crm-table th {
+  background: rgba(16, 24, 48, 0.85);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.crm-table tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+}
+
+.crm-table tbody tr:hover {
+  background: rgba(0, 240, 255, 0.02);
+}
+
+.crm-table td {
+  color: var(--color-text-main);
+  vertical-align: middle;
+}
+
+.td-client {
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+.td-email {
+  color: var(--color-text-muted);
+}
+
+.td-company {
+  font-weight: 500;
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-new { background: rgba(0, 210, 255, 0.12); color: var(--status-new); border: 1px solid rgba(0, 210, 255, 0.3); }
+.status-contacted { background: rgba(242, 201, 76, 0.12); color: var(--status-contacted); border: 1px solid rgba(242, 201, 76, 0.3); }
+.status-audit { background: rgba(177, 159, 251, 0.12); color: var(--status-audit); border: 1px solid rgba(177, 159, 251, 0.3); }
+.status-proposal { background: rgba(242, 153, 74, 0.12); color: var(--status-proposal); border: 1px solid rgba(242, 153, 74, 0.3); }
+.status-won { background: rgba(39, 201, 63, 0.12); color: var(--status-won); border: 1px solid rgba(39, 201, 63, 0.3); }
+.status-lost { background: rgba(255, 74, 74, 0.12); color: var(--status-lost); border: 1px solid rgba(255, 74, 74, 0.3); }
+
+/* Table Actions buttons */
+.btn-action {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  margin-right: 6px;
+}
+
+.btn-action:hover {
+  color: var(--cyan-glow);
+  background: rgba(0, 240, 255, 0.05);
+}
+
+.btn-action.btn-delete:hover {
+  color: var(--status-lost);
+  background: rgba(255, 74, 74, 0.05);
+}
+
+.btn-action svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem;
+  color: var(--color-text-muted);
+}
+
+.empty-state svg {
+  width: 48px;
+  height: 48px;
+  stroke: currentColor;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+/* ==========================================================================
+   Analytics Chart Section
+   ========================================================================== */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.chart-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2.25rem;
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.chart-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 2rem;
+}
+
+.funnel-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.funnel-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.funnel-label {
+  width: 140px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.funnel-bar-wrapper {
+  flex-grow: 1;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.funnel-bar {
+  height: 100%;
+  background: var(--gradient-blue);
+  background: linear-gradient(90deg, var(--blue-primary), var(--cyan-glow));
+  border-radius: 12px;
+  width: 0; /* Animated dynamically */
+  transition: width 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: var(--cyan-glow-shadow);
+}
+
+.funnel-bar.won {
+  background: linear-gradient(90deg, #138808, var(--status-won));
+  box-shadow: 0 0 15px rgba(39, 201, 63, 0.2);
+}
+
+.funnel-bar.lost {
+  background: linear-gradient(90deg, #b31010, var(--status-lost));
+  box-shadow: 0 0 15px rgba(255, 74, 74, 0.2);
+}
+
+.funnel-value {
+  width: 40px;
+  text-align: right;
+  font-weight: 700;
+  color: var(--color-white);
+  font-size: 0.9rem;
+}
+
+/* Status Breakdown cards */
+.breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border-left: 4px solid var(--border-color);
+}
+
+.breakdown-item.new { border-left-color: var(--status-new); }
+.breakdown-item.contacted { border-left-color: var(--status-contacted); }
+.breakdown-item.audit { border-left-color: var(--status-audit); }
+.breakdown-item.proposal { border-left-color: var(--status-proposal); }
+.breakdown-item.won { border-left-color: var(--status-won); }
+.breakdown-item.lost { border-left-color: var(--status-lost); }
+
+.breakdown-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--color-text-main);
+}
+
+.breakdown-value {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-white);
+}
+
+/* ==========================================================================
+   Modals
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(7, 11, 25, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  display: none; /* Shown by script */
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 680px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--glass-shadow), var(--cyan-glow-shadow);
+  overflow: hidden;
+  animation: modalPop 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.92) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-header {
+  background: rgba(16, 24, 48, 0.95);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.modal-header h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.btn-close:hover {
+  color: var(--color-white);
+}
+
+.modal-body {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.modal-grid-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.info-block span {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.info-block p {
+  font-size: 0.95rem;
+  color: var(--color-white);
+  font-weight: 500;
+}
+
+.message-box {
+  background: rgba(7, 11, 25, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-text-main);
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.notes-editor label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.notes-editor textarea {
+  width: 100%;
+  background: rgba(7, 11, 25, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: var(--color-white);
+  outline: none;
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.notes-editor textarea:focus {
+  border-color: var(--cyan-glow);
+}
+
+.modal-footer {
+  padding: 1.5rem 2rem;
+  background: rgba(16, 24, 48, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--color-text-main);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 240, 255, 0.05);
+  border-color: var(--cyan-glow);
+}
+
+/* ==========================================================================
+   Dashboard Widgets Layout & Styles
+   ========================================================================== */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.widget-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.3s ease;
+}
+
+.widget-card:hover {
+  border-color: rgba(0, 240, 255, 0.25);
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  transition: all 0.2s ease;
+}
+
+.task-item:hover {
+  background: rgba(0, 240, 255, 0.02);
+  border-color: rgba(0, 240, 255, 0.1);
+}
+
+.task-checkbox {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.task-checkbox:checked {
+  background-color: var(--cyan-glow);
+  border-color: var(--cyan-glow);
+}
+
+.task-checkbox:checked::after {
+  content: "✓";
+  color: var(--bg-dark);
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+.task-text {
+  font-size: 0.85rem;
+  color: var(--color-text-main);
+  flex-grow: 1;
+  transition: all 0.2s ease;
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: var(--color-text-muted);
+  opacity: 0.65;
+}
+
+.btn-task-delete {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 4px;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.task-item:hover .btn-task-delete {
+  opacity: 1;
+}
+
+.btn-task-delete:hover {
+  color: var(--status-lost);
+}
+
+.btn-task-delete svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+}
+
+/* ==========================================================================
+   Responsive Adaptation
+   ========================================================================== */
+@media (max-width: 1200px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .crm-layout {
+    flex-direction: column;
+  }
+  
+  .crm-sidebar {
+    width: 100%;
+    padding: 1.5rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .sidebar-brand {
+    margin-bottom: 1.5rem;
+  }
+  
+  .crm-main {
+    padding: 2rem;
+  }
+  
+  .control-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-box {
+    max-width: 100%;
+  }
+  
+  .filter-group {
+    flex-direction: column;
+  }
+}
+
+/* ==========================================================================
+   Advanced CRM Modules Styles
+   ========================================================================== */
+
+/* Kanban Drag and Drop Styles */
+.kanban-cards-stack {
+  overflow-y: auto;
+  max-height: 480px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.kanban-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 12px 14px;
+  cursor: grab;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+  user-select: none;
+}
+
+.kanban-card:active {
+  cursor: grabbing;
+}
+
+.kanban-card:hover {
+  border-color: var(--cyan-glow);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.15);
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.kanban-card-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-white);
+  margin-bottom: 4px;
+}
+
+.kanban-card-company {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.kanban-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kanban-card-value {
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--cyan-glow);
+}
+
+.kanban-card-probability {
+  font-size: 0.7rem;
+  color: var(--gold-accent);
+  background: rgba(242, 201, 76, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* AI Chat Elements */
+#ai-chat-logs {
+  scroll-behavior: smooth;
+}
+
+.ai-bubble-user {
+  align-self: flex-end;
+  background: rgba(0, 114, 255, 0.15);
+  border: 1px solid rgba(0, 114, 255, 0.3);
+  padding: 10px 14px;
+  border-radius: 12px 12px 0 12px;
+  font-size: 0.85rem;
+  color: var(--color-white);
+  max-width: 85%;
+  line-height: 1.5;
+  margin-left: auto;
+}
+
+.ai-bubble-system {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid var(--cyan-glow);
+  padding: 10px 14px;
+  border-radius: 0 12px 12px 12px;
+  font-size: 0.85rem;
+  color: var(--color-white);
+  max-width: 85%;
+  line-height: 1.5;
+  margin-right: auto;
+}
+
+/* Workload Progress Bar styling */
+.workload-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.workload-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--color-text-main);
+  font-weight: 500;
+}
+
+.workload-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.workload-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue-primary), var(--cyan-glow));
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+/* Role Switch Configs */
+.role-switch-btn {
+  padding: 8px 12px !important;
+  font-size: 0.8rem !important;
+  height: 38px !important;
+}
+
+.role-switch-btn.active {
+  background: linear-gradient(135deg, var(--blue-primary), var(--cyan-glow)) !important;
+  color: var(--bg-dark) !important;
+  font-weight: 700;
+}
+
+/* Subnav tabs */
+a.sidebar-link.active {
+  background: rgba(0, 240, 255, 0.08);
+  border-color: rgba(0, 240, 255, 0.3);
+  color: var(--color-white);
+}
+
+/* Hide inactive sections */
+.crm-section {
+  display: none;
+}
+
+.crm-section.active {
+  display: block;
+}

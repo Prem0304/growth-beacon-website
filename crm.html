@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRM Portal — Growth Beacon</title>
+  <!-- Montserrat & Inter Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="crm.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. Login Section
+       ========================================================================== -->
+  <section class="login-container" id="login-section">
+    <div class="login-box">
+      <a href="index.html" class="login-logo">
+        <img src="assets/growth_beacon_logo.jpg?v=4" alt="Growth Beacon Logo">
+        <span>GROWTH <span>BEACON</span></span>
+      </a>
+      <h2>CRM Access Portal</h2>
+      <p>Enter your authorization code to access agency command center.</p>
+      
+      <form id="login-form">
+        <div class="form-group">
+          <input type="password" id="password-input" placeholder="Authorization Code" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-primary">Authenticate</button>
+        <div class="login-error" id="login-error"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       2. CRM Layout
+       ========================================================================== -->
+  <div class="crm-layout" id="crm-layout" style="display: none;">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="crm-sidebar">
+      <div class="sidebar-brand">
+        <img src="assets/growth_beacon_logo.jpg?v=4" alt="Logo">
+        <span>GROWTH <span>BEACON</span></span>
+      </div>
+
+      <!-- Role Badge -->
+      <div style="padding: 0 1.5rem; margin-bottom: 1.5rem;">
+        <div style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 12px; padding: 10px 14px; display: flex; align-items: center; gap: 8px;">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--cyan-glow); box-shadow: 0 0 6px var(--cyan-glow);"></span>
+          <span style="font-size: 0.75rem; color: var(--color-text-muted); font-weight: 500;">Role:</span>
+          <span id="sidebar-role-badge" style="font-size: 0.75rem; color: var(--color-white); font-weight: 700; text-transform: uppercase;">Admin</span>
+        </div>
+      </div>
+      
+      <ul class="sidebar-menu">
+        <li>
+          <a class="sidebar-link active" id="nav-dashboard">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+            Command Center
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" id="nav-sales">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            Leads Pipeline
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" id="nav-clients">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+            </svg>
+            Client Workspace
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" id="nav-ai">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            AI Assistant
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" id="nav-settings">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+            System Admin
+          </a>
+        </li>
+      </ul>
+      
+      <div class="sidebar-footer">
+        <a class="sidebar-link" id="btn-logout">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+          </svg>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content Panel -->
+    <main class="crm-main">
+      
+      <!-- Panel Header -->
+      <header class="panel-header">
+        <div class="panel-title">
+          <h1 id="panel-title-text">Executive Command Center</h1>
+          <p id="panel-subtitle-text">Growth Beacon Agency Metrics & Operations Overview.</p>
+        </div>
+      </header>
+
+      <!-- ==========================================================================
+           TAB 1: Executive Dashboard (Command Center)
+           ========================================================================== -->
+      <section class="crm-section active" id="section-dashboard">
+        <!-- Dashboard Summary Grid -->
+        <div class="summary-grid" style="margin-bottom: 2.5rem;">
+          <div class="summary-card">
+            <div class="card-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
+            <div class="card-info"><span>Total Leads</span><h3 id="dash-total-leads">0</h3></div>
+          </div>
+          <div class="summary-card">
+            <div class="card-icon" style="color: var(--status-new);"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg></div>
+            <div class="card-info"><span>Close Rate</span><h3 id="dash-conversion-rate">0%</h3></div>
+          </div>
+          <div class="summary-card">
+            <div class="card-icon" style="color: var(--status-won);"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg></div>
+            <div class="card-info"><span>Active Clients</span><h3 id="dash-active-clients">0</h3></div>
+          </div>
+          <div class="summary-card">
+            <div class="card-icon" style="color: var(--cyan-glow);"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M12 16v1M10 11h2m0 0h2"></path></svg></div>
+            <div class="card-info"><span>Monthly Revenue (MRR)</span><h3 id="dash-total-mmr">₹0</h3></div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <!-- Left Column: Simple Accounting & Targets -->
+          <div class="dashboard-left">
+            <div class="widget-card">
+              <h3 class="card-title">Monthly Revenue Pipeline (₹)</h3>
+              <div class="funnel-container" style="gap: 1.25rem;">
+                <div class="funnel-row">
+                  <div class="funnel-label" style="width: 110px;">Settled Revenue</div>
+                  <div class="funnel-bar-wrapper" style="height: 14px;"><div class="funnel-bar won" id="forecast-mmr-bar" style="width: 0%;"></div></div>
+                  <div class="funnel-value" id="forecast-mmr-val">₹0</div>
+                </div>
+                <div class="funnel-row">
+                  <div class="funnel-label" style="width: 110px;">Outstanding</div>
+                  <div class="funnel-bar-wrapper" style="height: 14px;"><div class="funnel-bar" id="forecast-outstanding-bar" style="width: 0%; background: var(--status-proposal);"></div></div>
+                  <div class="funnel-value" id="forecast-outstanding-val">₹0</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Simple Task Checklist -->
+          <div class="dashboard-right">
+            <div class="widget-card">
+              <div class="widget-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+                <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1rem; color: var(--color-white); font-weight: 700; margin: 0;">Today's Checklist</h3>
+              </div>
+              <div class="task-input-row" style="display: flex; gap: 8px; margin-bottom: 1.25rem;">
+                <input type="text" id="task-input" placeholder="Add new to-do task..." style="flex-grow: 1; background: rgba(7, 11, 25, 0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--color-white); font-size: 0.85rem; outline: none;">
+                <button class="btn-primary" id="btn-add-task" style="width: 40px; padding: 0; font-size: 1.25rem; display: flex; align-items: center; justify-content: center; border-radius: 8px;">+</button>
+              </div>
+              <ul class="task-list" id="task-list" style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+                <!-- Generated Dynamically -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           TAB 2: Leads Pipeline
+           ========================================================================== -->
+      <section class="crm-section" id="section-sales">
+        <div class="control-bar" style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; gap: 10px;">
+            <button class="btn-primary active" id="btn-toggle-pipeline-list">Table View</button>
+            <button class="btn-secondary" id="btn-toggle-pipeline-kanban">Kanban Board</button>
+          </div>
+          <button class="btn-primary" id="btn-add-lead-toggle" style="width: auto; padding: 8px 16px;">+ Add New Lead</button>
+        </div>
+
+        <!-- Add Manual Lead Form Drawer -->
+        <div id="add-lead-drawer" style="display: none; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 2rem; margin-bottom: 2rem;">
+          <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--color-white); margin-bottom: 1.25rem;">Add New Client Lead</h3>
+          <form id="new-lead-form" style="display: flex; flex-direction: column; gap: 1rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <input type="text" id="lead-name" placeholder="Client Name" required>
+              <input type="text" id="lead-company" placeholder="Company Name" required>
+              <input type="email" id="lead-email" placeholder="Email Address" required>
+              <input type="text" id="lead-phone" placeholder="WhatsApp Number (+91)" required>
+              <select class="select-filter" id="lead-service" style="width: 100%; height:45px;">
+                <option value="SMM & Branding Package">SMM & Branding Package (₹20,000/mo)</option>
+                <option value="PPC Ad Campaigns">PPC Ad Campaigns (₹35,000/mo)</option>
+                <option value="Complete SEO & CRO Engine">SEO & CRO Blueprint (₹50,000/mo)</option>
+              </select>
+              <select class="select-filter" id="lead-status" style="width: 100%; height:45px;">
+                <option value="New">New</option>
+                <option value="Contacted">Contacted</option>
+                <option value="Audit Scheduled">Audit Scheduled</option>
+                <option value="Proposal Sent">Proposal Sent</option>
+                <option value="Won">Won</option>
+              </select>
+            </div>
+            <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px;">
+              <button type="button" class="btn-secondary" id="btn-cancel-lead">Cancel</button>
+              <button type="submit" class="btn-primary" style="width: auto; padding: 8px 20px;">Save Lead</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Pipelines List View panel -->
+        <div id="pipeline-list-container">
+          <div class="control-bar" style="margin-bottom: 1.5rem;">
+            <div class="search-box">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              <input type="text" id="sales-search-input" placeholder="Search leads...">
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="crm-table">
+              <thead>
+                <tr>
+                  <th>Client Name</th>
+                  <th>Company</th>
+                  <th>Contact Info</th>
+                  <th>Package Plan</th>
+                  <th>Date Logged</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="sales-table-body">
+                <!-- Generated Dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Pipelines Kanban Board View panel -->
+        <div id="pipeline-kanban-container" style="display: none;">
+          <div class="kanban-board-wrapper" style="display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem;">
+            <!-- Column 1: New -->
+            <div class="kanban-column" data-status="New" style="flex: 1; min-width: 230px; background: rgba(7, 11, 25, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem;">
+              <h4 style="color: var(--color-white); margin-bottom: 1rem; display: flex; justify-content: space-between; font-size: 0.9rem;">
+                <span>New Lead</span><span class="badge" style="background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 20px;" id="count-kanban-new">0</span>
+              </h4>
+              <div class="kanban-cards-stack" id="stack-new" style="min-height: 380px;"></div>
+            </div>
+            <!-- Column 2: Contacted -->
+            <div class="kanban-column" data-status="Contacted" style="flex: 1; min-width: 230px; background: rgba(7, 11, 25, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem;">
+              <h4 style="color: var(--status-contacted); margin-bottom: 1rem; display: flex; justify-content: space-between; font-size: 0.9rem;">
+                <span>Contacted</span><span class="badge" style="background: rgba(242, 201, 76, 0.1);" id="count-kanban-contacted">0</span>
+              </h4>
+              <div class="kanban-cards-stack" id="stack-contacted" style="min-height: 380px;"></div>
+            </div>
+            <!-- Column 3: Audit Scheduled -->
+            <div class="kanban-column" data-status="Audit Scheduled" style="flex: 1; min-width: 230px; background: rgba(7, 11, 25, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem;">
+              <h4 style="color: var(--status-new); margin-bottom: 1rem; display: flex; justify-content: space-between; font-size: 0.9rem;">
+                <span>Audit scheduled</span><span class="badge" style="background: rgba(0, 210, 255, 0.1);" id="count-kanban-audit">0</span>
+              </h4>
+              <div class="kanban-cards-stack" id="stack-audit" style="min-height: 380px;"></div>
+            </div>
+            <!-- Column 4: Proposal Sent -->
+            <div class="kanban-column" data-status="Proposal Sent" style="flex: 1; min-width: 230px; background: rgba(7, 11, 25, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem;">
+              <h4 style="color: var(--status-proposal); margin-bottom: 1rem; display: flex; justify-content: space-between; font-size: 0.9rem;">
+                <span>Proposal Sent</span><span class="badge" style="background: rgba(242, 153, 74, 0.1);" id="count-kanban-proposal">0</span>
+              </h4>
+              <div class="kanban-cards-stack" id="stack-proposal" style="min-height: 380px;"></div>
+            </div>
+            <!-- Column 5: Won -->
+            <div class="kanban-column" data-status="Won" style="flex: 1; min-width: 230px; background: rgba(7, 11, 25, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem;">
+              <h4 style="color: var(--status-won); margin-bottom: 1rem; display: flex; justify-content: space-between; font-size: 0.9rem;">
+                <span>Closed - Won</span><span class="badge" style="background: rgba(39, 201, 63, 0.1);" id="count-kanban-won">0</span>
+              </h4>
+              <div class="kanban-cards-stack" id="stack-won" style="min-height: 380px;"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           TAB 3: Client Workspace (Delivery & Billing)
+           ========================================================================== -->
+      <section class="crm-section" id="section-clients">
+        <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--color-white); margin-bottom: 1.25rem;">Active Retainer Clients</h3>
+        
+        <!-- Table Content -->
+        <div class="table-container" style="margin-bottom: 2rem;">
+          <table class="crm-table">
+            <thead>
+              <tr>
+                <th>Client / Company</th>
+                <th>Monthly Retainer</th>
+                <th>Onboarding Checklist</th>
+                <th>GST Invoice Stage</th>
+                <th>Last Update</th>
+                <th>Client Portal Link</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="clients-table-body">
+              <!-- Generated Dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="dashboard-grid">
+          <!-- Left Column: Invoices Log -->
+          <div class="dashboard-left">
+            <div class="widget-card">
+              <div class="widget-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem;">
+                <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1rem; color: var(--color-white); font-weight: 700; margin: 0;">GST Invoice Logs</h3>
+                <button class="btn-primary" id="btn-add-invoice" style="width: auto; padding: 4px 10px; font-size: 0.75rem;">+ Create Invoice</button>
+              </div>
+
+              <!-- Invoice drawer builder -->
+              <div id="invoice-builder-box" style="display: none; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1rem;">
+                <form id="invoice-form" style="display:flex; flex-direction:column; gap:10px;">
+                  <select class="select-filter" id="inv-client-select" style="width: 100%; height:38px; font-size:0.8rem;"></select>
+                  <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <input type="number" id="inv-amount" placeholder="Billing Amount (₹)" required style="height:38px; font-size:0.8rem;">
+                    <select class="select-filter" id="inv-type" style="width:100%; height:38px; font-size:0.8rem;">
+                      <option value="Deposit Advance (50%)">Deposit Advance (50%)</option>
+                      <option value="Final Retainer (50%)">Final Retainer (50%)</option>
+                      <option value="Monthly Retainer (100%)">Monthly Retainer (100%)</option>
+                    </select>
+                  </div>
+                  <div style="display:flex; gap:10px; justify-content:flex-end;">
+                    <button type="submit" class="btn-primary" style="width:auto; padding: 6px 15px; font-size:0.8rem;">Save Invoice</button>
+                  </div>
+                </form>
+              </div>
+
+              <div class="table-container">
+                <table class="crm-table">
+                  <thead>
+                    <tr>
+                      <th>Invoice ID</th>
+                      <th>Client</th>
+                      <th>Amount</th>
+                      <th>Type</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="finance-invoices-tbody">
+                    <!-- Generated Dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Support Tickets -->
+          <div class="dashboard-right">
+            <div class="widget-card">
+              <div class="widget-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+                <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1rem; color: var(--color-white); font-weight: 700; margin: 0;">Support Tickets</h3>
+                <button class="btn-primary" id="btn-add-ticket-toggle" style="width: auto; padding: 4px 10px; font-size: 0.75rem;">+ Log Ticket</button>
+              </div>
+
+              <!-- Inline Ticket Adder -->
+              <div id="ticket-adder-box" style="display: none; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1rem;">
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <select class="select-filter" id="ticket-client-select" style="width: 100%; height: 38px; font-size: 0.8rem;"></select>
+                  <input type="text" id="ticket-title-input" placeholder="Ticket Description..." style="background: rgba(7,11,25,0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; color: var(--color-white); font-size: 0.8rem;">
+                  <button class="btn-primary" id="btn-submit-ticket" style="font-size: 0.8rem; padding: 8px;">Create Ticket</button>
+                </div>
+              </div>
+
+              <ul class="task-list" id="tickets-list-container" style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+                <!-- Generated Dynamically -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           TAB 4: AI Help Assistant (AI Layer)
+           ========================================================================== -->
+      <section class="crm-section" id="section-ai">
+        <div class="dashboard-grid">
+          <!-- Left: Assistant Chat Logs -->
+          <div class="dashboard-left" style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div class="widget-card" style="flex-grow: 1; min-height: 380px; display: flex; flex-direction: column; justify-content: space-between;">
+              <h3 class="card-title" style="margin-bottom: 1.25rem;">GrowthBeacon Assistant</h3>
+              
+              <!-- Conversations log stack -->
+              <div id="ai-chat-logs" style="flex-grow: 1; overflow-y: auto; background: rgba(7, 11, 25, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 12px; max-height: 300px;">
+                <div style="background: rgba(255,255,255,0.02); border-left: 3px solid var(--cyan-glow); padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 0.85rem; color: var(--color-white); line-height: 1.5;">
+                  <strong>AI Assistant:</strong> Vanakkam/Hello! How can I assist you with your Growth Beacon agency accounts today? Select a query on the right or type your question below.
+                </div>
+              </div>
+
+              <!-- Input bar -->
+              <div style="display: flex; gap: 8px;">
+                <input type="text" id="ai-chat-input" placeholder="Ask about outstanding payments, draft captions, client risk..." style="flex-grow:1; background: rgba(7,11,25,0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--color-white); outline: none; font-size: 0.85rem;">
+                <button class="btn-primary" id="btn-submit-ai-chat" style="width: auto; padding: 0 20px;">Send</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Quick recommendation prompts -->
+          <div class="dashboard-right">
+            <div class="widget-card">
+              <h3 class="card-title">Quick AI Queries</h3>
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <button class="btn-secondary btn-ai-prompt" data-prompt="Which clients are at risk of leaving?" style="text-align: left; font-size: 0.8rem; justify-content: flex-start; padding: 12px;">📊 Which clients are at risk of leaving?</button>
+                <button class="btn-secondary btn-ai-prompt" data-prompt="Suggest SEO keywords for Digital Marketing" style="text-align: left; font-size: 0.8rem; justify-content: flex-start; padding: 12px;">🔍 Suggest SEO keywords for Digital Marketing</button>
+                <button class="btn-secondary btn-ai-prompt" data-prompt="Generate Instagram caption for brand growth" style="text-align: left; font-size: 0.8rem; justify-content: flex-start; padding: 12px;">📱 Generate Instagram caption for brand growth</button>
+                <button class="btn-secondary btn-ai-prompt" data-prompt="Predict lead conversion probability" style="text-align: left; font-size: 0.8rem; justify-content: flex-start; padding: 12px;">📈 Predict lead conversion probability</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active AI Agents Grid -->
+        <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--color-white); margin-top: 2rem; margin-bottom: 1.25rem;">Active Agency AI Agents Roster</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
+          
+          <!-- Agent 1: SDR -->
+          <div class="widget-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 180px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <strong style="color: var(--color-white); font-size: 0.9rem;">🤖 AI Sales SDR</strong>
+                <span class="status-badge status-won" style="font-size: 0.65rem; padding: 2px 6px;" id="agent-sdr-status">ACTIVE</span>
+              </div>
+              <p style="font-size: 0.72rem; color: var(--color-text-muted); line-height: 1.4; margin-bottom: 12px;" id="agent-sdr-log">Ready to qualify new lead submissions.</p>
+            </div>
+            <button class="btn-primary btn-run-agent" data-agent="sdr" style="padding: 6px; font-size: 0.75rem; width: 100%;">Run Lead Audit</button>
+          </div>
+
+          <!-- Agent 2: Account Manager -->
+          <div class="widget-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 180px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <strong style="color: var(--color-white); font-size: 0.9rem;">🤝 AI Account Manager</strong>
+                <span class="status-badge status-won" style="font-size: 0.65rem; padding: 2px 6px;" id="agent-am-status">ACTIVE</span>
+              </div>
+              <p style="font-size: 0.72rem; color: var(--color-text-muted); line-height: 1.4; margin-bottom: 12px;" id="agent-am-log">Monitoring client assets checklists.</p>
+            </div>
+            <button class="btn-primary btn-run-agent" data-agent="am" style="padding: 6px; font-size: 0.75rem; width: 100%;">Verify Onboarding</button>
+          </div>
+
+          <!-- Agent 3: SEO Specialist -->
+          <div class="widget-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 180px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <strong style="color: var(--color-white); font-size: 0.9rem;">🔍 AI SEO Specialist</strong>
+                <span class="status-badge status-won" style="font-size: 0.65rem; padding: 2px 6px;" id="agent-seo-status">ACTIVE</span>
+              </div>
+              <p style="font-size: 0.72rem; color: var(--color-text-muted); line-height: 1.4; margin-bottom: 12px;" id="agent-seo-log">Drafting search keyword blueprints.</p>
+            </div>
+            <button class="btn-primary btn-run-agent" data-agent="seo" style="padding: 6px; font-size: 0.75rem; width: 100%;">Research Keywords</button>
+          </div>
+
+          <!-- Agent 4: Media Buyer -->
+          <div class="widget-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 180px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <strong style="color: var(--color-white); font-size: 0.9rem;">📱 AI Media Buyer</strong>
+                <span class="status-badge status-won" style="font-size: 0.65rem; padding: 2px 6px;" id="agent-ads-status">ACTIVE</span>
+              </div>
+              <p style="font-size: 0.72rem; color: var(--color-text-muted); line-height: 1.4; margin-bottom: 12px;" id="agent-ads-log">Optimizing paid advertising ROAS.</p>
+            </div>
+            <button class="btn-primary btn-run-agent" data-agent="ads" style="padding: 6px; font-size: 0.75rem; width: 100%;">Optimize Ads ROAS</button>
+          </div>
+
+          <!-- Agent 5: Accountant -->
+          <div class="widget-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 180px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <strong style="color: var(--color-white); font-size: 0.9rem;">💰 AI Accountant</strong>
+                <span class="status-badge status-won" style="font-size: 0.65rem; padding: 2px 6px;" id="agent-bill-status">ACTIVE</span>
+              </div>
+              <p style="font-size: 0.72rem; color: var(--color-text-muted); line-height: 1.4; margin-bottom: 12px;" id="agent-bill-log">Auditing outstanding GST invoices.</p>
+            </div>
+            <button class="btn-primary btn-run-agent" data-agent="bill" style="padding: 6px; font-size: 0.75rem; width: 100%;">Nudge Late Payments</button>
+          </div>
+
+          <!-- Agent 6: PR Reputation -->
+          <div class="widget-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 180px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <strong style="color: var(--color-white); font-size: 0.9rem;">📢 AI PR Agent</strong>
+                <span class="status-badge status-won" style="font-size: 0.65rem; padding: 2px 6px;" id="agent-pr-status">ACTIVE</span>
+              </div>
+              <p style="font-size: 0.72rem; color: var(--color-text-muted); line-height: 1.4; margin-bottom: 12px;" id="agent-pr-log">Monitoring local directory map reviews.</p>
+            </div>
+            <button class="btn-primary btn-run-agent" data-agent="pr" style="padding: 6px; font-size: 0.75rem; width: 100%;">Audit GMB Reviews</button>
+          </div>
+
+          <!-- Agent 7: Report Analyst -->
+          <div class="widget-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 180px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <strong style="color: var(--color-white); font-size: 0.9rem;">📊 AI Reporting Analyst</strong>
+                <span class="status-badge status-won" style="font-size: 0.65rem; padding: 2px 6px;" id="agent-report-status">ACTIVE</span>
+              </div>
+              <p style="font-size: 0.72rem; color: var(--color-text-muted); line-height: 1.4; margin-bottom: 12px;" id="agent-report-log">Aggregating monthly campaign data.</p>
+            </div>
+            <button class="btn-primary btn-run-agent" data-agent="report" style="padding: 6px; font-size: 0.75rem; width: 100%;">Generate Reports</button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           TAB 5: System Admin Settings
+           ========================================================================== -->
+      <section class="crm-section" id="section-settings">
+        <div class="dashboard-grid">
+          <!-- Left: Roles & access configs -->
+          <div class="dashboard-left" style="display: flex; flex-direction: column; gap: 2rem;">
+            <div class="widget-card">
+              <h3 class="card-title">Simulate Permission Role</h3>
+              <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">Toggle user permission roles. Writers and Designers have restricted access.</p>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                <button class="btn-secondary role-switch-btn active" data-role="admin">Admin</button>
+                <button class="btn-secondary role-switch-btn" data-role="account_manager">Account Manager</button>
+                <button class="btn-secondary role-switch-btn" data-role="graphic_designer">Graphic Designer</button>
+                <button class="btn-secondary role-switch-btn" data-role="seo_specialist">SEO Specialist</button>
+                <button class="btn-secondary role-switch-btn" data-role="content_writer">Content Writer</button>
+                <button class="btn-secondary role-switch-btn" data-role="performance_marketer">Marketer</button>
+              </div>
+            </div>
+
+            <!-- CRM Reset options -->
+            <div class="widget-card">
+              <h3 class="card-title">System Settings</h3>
+              <div style="display: flex; gap: 12px;">
+                <button class="btn-secondary" id="btn-settings-backup" style="flex:1;">📥 Export Backup (.json)</button>
+                <button class="btn-secondary" id="btn-settings-reset" style="flex:1; border-color: rgba(255,74,74,0.3); color: var(--status-lost);">⚠️ Reset All Local Data</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Security Audit Logs -->
+          <div class="dashboard-right">
+            <div class="widget-card">
+              <h3 class="card-title">Session Action Log</h3>
+              <ul class="task-list" id="settings-logs-container" style="list-style: none; display: flex; flex-direction: column; gap: 10px; max-height: 300px; overflow-y: auto;">
+                <!-- Generated Dynamically -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ==========================================================================
+       3. Lead Details Modal Overlay (General sales logs updates)
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 id="modal-title">Client Details</h2>
+        <button class="btn-close" id="modal-close">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="modal-grid-info">
+          <div class="info-block">
+            <span>Name</span>
+            <p id="modal-info-name">-</p>
+          </div>
+          <div class="info-block">
+            <span>Email</span>
+            <p id="modal-info-email">-</p>
+          </div>
+          <div class="info-block">
+            <span>Company</span>
+            <p id="modal-info-company">-</p>
+          </div>
+          <div class="info-block">
+            <span>Requested Service</span>
+            <p id="modal-info-service">-</p>
+          </div>
+          <div class="info-block">
+            <span>Submission Date</span>
+            <p id="modal-info-date">-</p>
+          </div>
+          <div class="info-block">
+            <span>Pipeline Status</span>
+            <select class="select-filter" id="modal-status-select" style="width: 100%; margin-top: 4px;">
+              <option value="New">New</option>
+              <option value="Contacted">Contacted</option>
+              <option value="Audit Scheduled">Audit Scheduled</option>
+              <option value="Proposal Sent">Proposal Sent</option>
+              <option value="Won">Won</option>
+              <option value="Lost">Lost</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <span>Client Message</span>
+          <div class="message-box" id="modal-info-message">-</div>
+        </div>
+
+        <div class="notes-editor">
+          <label for="modal-notes-area">Internal Notes & Action History</label>
+          <textarea id="modal-notes-area" rows="4" placeholder="Type internal deal progress history notes..."></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-secondary" id="modal-btn-close">Cancel</button>
+        <button class="btn-primary" id="modal-btn-save" style="width: auto; padding: 10px 24px;">Save Pipeline Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       4. Comms Template Modal Overlay
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-comms-overlay">
+    <div class="modal-box" style="max-width: 600px;">
+      <div class="modal-header">
+        <h2 id="comms-modal-title">Send Client Communication</h2>
+        <button class="btn-close" id="modal-comms-close">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="modal-grid-info" style="grid-template-columns: 1fr 1fr; margin-bottom: 0.5rem;">
+          <div class="info-block">
+            <span>Select Channel</span>
+            <select class="select-filter" id="comms-channel" style="width: 100%; margin-top: 4px; height: 42px;">
+              <option value="email">Email Client</option>
+              <option value="whatsapp">WhatsApp Message</option>
+            </select>
+          </div>
+          <div class="info-block">
+            <span>Select Template</span>
+            <select class="select-filter" id="comms-template" style="width: 100%; margin-top: 4px; height: 42px;">
+              <option value="advance_payment">1. 50% Advance Payment Request</option>
+              <option value="onboarding">2. Onboarding Welcome</option>
+              <option value="draft_delivery">3. Draft Content Delivery</option>
+              <option value="final_payment">4. Remaining 50% Payment Request</option>
+              <option value="final_delivery">5. Final Project Delivery</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="info-block" id="email-subject-group">
+          <span>Email Subject</span>
+          <input type="text" id="comms-subject" style="width: 100%; background: rgba(7, 11, 25, 0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--color-white); font-size: 0.9rem; outline: none; margin-top: 4px;">
+        </div>
+
+        <div class="notes-editor" style="margin-top: 0.5rem;">
+          <label for="comms-body">Message Preview</label>
+          <textarea id="comms-body" rows="9" style="width: 100%; background: rgba(7, 11, 25, 0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 14px; color: var(--color-white); outline: none; font-family: inherit; font-size: 0.9rem; resize: vertical; line-height: 1.5;"></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-secondary" id="modal-comms-cancel">Cancel</button>
+        <button class="btn-primary" id="modal-comms-send" style="width: auto; padding: 10px 24px;">Launch Message</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="crm.js"></script>
+</body>
+</html>

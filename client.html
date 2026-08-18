@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Workspace - Growth Beacon</title>
+  
+  <!-- SEO Meta -->
+  <meta name="description" content="Secure client portal workspace to track campaign milestones, submit brief information, and access shared delivery files.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="client.css">
+</head>
+<body>
+
+  <!-- Background Blur Blobs -->
+  <div class="blur-blob blob-1"></div>
+  <div class="blur-blob blob-2"></div>
+
+  <!-- Client Layout -->
+  <div class="client-container">
+    
+    <!-- Portal Header -->
+    <header class="portal-header">
+      <div class="brand">
+        <img src="assets/growth_beacon_logo.jpg?v=4" alt="Growth Beacon Logo" class="logo-img">
+        <span class="logo-text">GROWTH <span class="accent-text">BEACON</span></span>
+      </div>
+      <div class="workspace-badge">CLIENT PORTAL</div>
+    </header>
+
+    <!-- Error/Not Found View (Hidden by default) -->
+    <div id="error-view" class="portal-card" style="display: none; text-align: center; padding: 4rem 2rem;">
+      <svg class="error-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 64px; height: 64px; color: #ff4a4a; margin: 0 auto 1.5rem;">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+      </svg>
+      <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 800; color: #ffffff; margin-bottom: 1rem;">Workspace Not Found</h2>
+      <p style="color: #94a3b8; max-width: 400px; margin: 0 auto 2rem;">The client workspace URL is invalid or has expired. Please verify your link or contact our team support.</p>
+    </div>
+
+    <!-- Active Workspace View -->
+    <div id="workspace-view" style="display: none;">
+      
+      <!-- Welcome Hero Card -->
+      <section class="portal-card welcome-hero">
+        <div class="welcome-text">
+          <h1 id="client-welcome-name">Welcome Back, client!</h1>
+          <p id="client-project-service">Your campaign workspace for <strong>Search Engine Optimization</strong></p>
+        </div>
+        <div class="project-meta">
+          <div class="meta-item">
+            <span>Project Status</span>
+            <div id="badge-onboarding" class="badge-status">Pending Onboarding</div>
+          </div>
+          <div class="meta-item">
+            <span>Client Account</span>
+            <strong id="client-company-name">Apex Retail Group</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Layout Grid -->
+      <div class="portal-grid">
+        
+        <!-- Left Column: Milestones & Briefing Form -->
+        <div class="portal-main-column">
+          
+          <!-- Interactive Progress Timeline -->
+          <div class="portal-card">
+            <h3 class="card-title">Campaign Milestone Tracker</h3>
+            
+            <div class="timeline">
+              
+              <!-- Step 1 -->
+              <div class="timeline-step" id="step-advance">
+                <div class="step-indicator">
+                  <div class="step-dot"></div>
+                  <div class="step-line"></div>
+                </div>
+                <div class="step-content">
+                  <h4>1. 50% Advance Payment</h4>
+                  <p>Deposit payment required to lock resource schedules and begin planning.</p>
+                  <div class="step-action" id="action-advance">
+                    <!-- Dynamic CTA button (e.g. Pay now link or Completed mark) -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="timeline-step" id="step-onboard">
+                <div class="step-indicator">
+                  <div class="step-dot"></div>
+                  <div class="step-line"></div>
+                </div>
+                <div class="step-content">
+                  <h4>2. Onboarding Briefing Form</h4>
+                  <p>Provide target audience, website metrics, and account credentials so our team can plan campaigns.</p>
+                  <div class="step-action" id="action-onboard">
+                    <!-- Scroll to Form button -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="timeline-step" id="step-drafts">
+                <div class="step-indicator">
+                  <div class="step-dot"></div>
+                  <div class="step-line"></div>
+                </div>
+                <div class="step-content">
+                  <h4>3. Campaign Strategy & Drafts Review</h4>
+                  <p>Inspect SEO search keywords matrices, content templates, or advertising mockups.</p>
+                  <div class="step-action" id="action-drafts">
+                    <!-- View drafts button -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 4 -->
+              <div class="timeline-step" id="step-finalpay">
+                <div class="step-indicator">
+                  <div class="step-dot"></div>
+                  <div class="step-line"></div>
+                </div>
+                <div class="step-content">
+                  <h4>4. Remaining 50% Milestone Invoice</h4>
+                  <p>Final project invoice settlement once campaign strategy/drafts are approved.</p>
+                  <div class="step-action" id="action-finalpay">
+                    <!-- Pay button -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 5 -->
+              <div class="timeline-step" id="step-delivery">
+                <div class="step-indicator">
+                  <div class="step-dot"></div>
+                </div>
+                <div class="step-content">
+                  <h4>5. Live Campaign Delivery</h4>
+                  <p>Final release of completed assets, ad account activation, and tracking dashboards launch.</p>
+                  <div class="step-action" id="action-delivery">
+                    <!-- Delivery docs link -->
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Onboarding Briefing Form -->
+          <div class="portal-card" id="briefing-form-card">
+            <h3 class="card-title">Onboarding Briefing Form</h3>
+            <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem;">Fill out this brief to help us align our strategy with your commercial goals.</p>
+            
+            <form id="onboarding-brief-form">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="brief-website">Website URL</label>
+                  <input type="url" id="brief-website" placeholder="https://yourcompany.com" required>
+                </div>
+                <div class="form-group">
+                  <label for="brief-competitor">Top Competitor URL</label>
+                  <input type="url" id="brief-competitor" placeholder="https://competitor.com">
+                </div>
+                <div class="form-group">
+                  <label for="brief-audience">Target Demographics / Audience</label>
+                  <input type="text" id="brief-audience" placeholder="e.g. B2B Founders, Tech Developers" required>
+                </div>
+                <div class="form-group">
+                  <label for="brief-channel">Primary Traffic / Revenue Goals</label>
+                  <input type="text" id="brief-channel" placeholder="e.g. 20% direct checkout sales increase" required>
+                </div>
+              </div>
+              <div class="form-group" style="margin-top: 1.5rem;">
+                <label for="brief-notes">Integration Credentials & Details</label>
+                <textarea id="brief-notes" rows="4" placeholder="Paste Google Analytics tags, Meta Ads manager codes, or server access directions..."></textarea>
+              </div>
+              
+              <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
+                <button type="submit" class="btn-primary" id="btn-submit-brief">Submit Briefing Info</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Details & Resources -->
+        <div class="portal-sidebar-column">
+          
+          <!-- Shared Resources Links Card -->
+          <div class="portal-card">
+            <h3 class="card-title">Shared Assets & Links</h3>
+            
+            <ul class="resources-list">
+              <li>
+                <a href="https://growthbeacon.com/slack" target="_blank" class="resource-link">
+                  <div class="resource-icon" style="background: rgba(224, 30, 90, 0.1); color: #e01e5a;">
+                    💬
+                  </div>
+                  <div class="resource-info">
+                    <strong>Private Slack Channel</strong>
+                    <span>Real-time team access</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="https://growthbeacon.com/deliveries/shared" target="_blank" class="resource-link">
+                  <div class="resource-icon" style="background: rgba(0, 240, 255, 0.1); color: #00f0ff;">
+                    📂
+                  </div>
+                  <div class="resource-info">
+                    <strong>Google Drive Folder</strong>
+                    <span>All campaign drafts</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="https://growthbeacon.com/deliveries/final" target="_blank" class="resource-link">
+                  <div class="resource-icon" style="background: rgba(112, 0, 255, 0.1); color: #7000ff;">
+                    📊
+                  </div>
+                  <div class="resource-info">
+                    <strong>Fulfillment Dashboard</strong>
+                    <span>Real-time search metrics</span>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Notes / Activity Feed Card -->
+          <div class="portal-card">
+            <h3 class="card-title">Operations Log & Chat</h3>
+            <div class="log-container" id="activity-log-feed">
+              <!-- Logs populated dynamically -->
+              <div class="log-entry">
+                <span class="log-time">August 9, 2026</span>
+                <p>Welcome to Growth Beacon! Your project record has been approved by Founder Premkumar.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="client.js"></script>
+</body>
+</html>
