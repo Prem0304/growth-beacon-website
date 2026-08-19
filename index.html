@@ -67,12 +67,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   
   <!-- Custom Styling -->
-  <link rel="stylesheet" href="style.css?v=6">
+  <link rel="stylesheet" href="style.css?v=28">
 </head>
 <body>
-
-  <!-- Background Beacon sweeping effect -->
-  <div class="beacon-glow-bg"></div>
 
   <!-- Navigation Bar -->
   <header class="header">
@@ -95,6 +92,12 @@
       </nav>
     </div>
   </header>
+
+  <!-- Page Wrapper to clip horizontal overflows -->
+  <div class="page-wrapper">
+
+    <!-- Background Beacon sweeping effect -->
+    <div class="beacon-glow-bg"></div>
 
   <!-- Hero/Home Section -->
   <section class="hero-section" id="home">
@@ -120,8 +123,36 @@
   <!-- About Section -->
   <section class="about-section section-padding" id="about">
     <div class="container about-container">
-      <div class="about-visual">
-        <div class="vertical-vms-stack">
+      <div class="about-content">
+        <span class="section-subtitle">Who We Are</span>
+        <h2 class="section-title">Guiding Brands Through the <span class="text-gradient">Digital Noise</span></h2>
+        <p class="about-text">At Growth Beacon, we don't believe in marketing guess-work or superficial metrics. We operate as an extension of your growth team, engineered to illuminate clear, predictable pathways to customer acquisition. Our core philosophy is built on absolute transparency, unit-economic focus, and rapid execution. We combine content intelligence, algorithmic bidding optimization, and conversion science to scale enterprise leads and revenue.</p>
+        
+        <p class="about-text">We specialize in scaling businesses across South Tamil Nadu—focusing on high-growth retail hubs, manufacturers, showrooms, and local enterprises in Theni, Madurai, Coimbatore, and Dindigul. By diving deep into regional buyer intent, localized search trends, and local-language digital behavior, we help local champions dominate their markets and compete on a national scale.</p>
+        
+        <p class="about-text">Unlike traditional agencies that prioritize vanity metrics like page impressions, social media likes, or clicks, we focus strictly on your bottom line. We track campaign performance directly against CRM closed-won revenue, client acquisition cost (CAC), and customer lifetime value (LTV). Our complete pipeline visibility ensures that every marketing rupee spent yields measurable, compounding returns.</p>
+        
+        <div class="about-values" style="margin-top: 3rem;">
+          <div class="value-item">
+            <span class="value-icon">✓</span>
+            <div>
+              <h4>Data Integrity</h4>
+              <p>Vanity metrics don't pay bills. We align campaigns with your actual CRM bottom line, tracking real sales and cash flow contributions.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <span class="value-icon">✓</span>
+            <div>
+              <h4>Agile Velocity</h4>
+              <p>We launch, test, and iterate marketing strategies at startup speed, cutting underperforming ads early and scaling winning pipelines quickly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vision, Mission, Strategy Full-Width Horizontal Subgrid -->
+      <div class="about-vms">
+        <div class="vms-grid">
           <!-- Vision -->
           <div class="vms-card animate-card">
             <div class="vms-icon-wrapper cyan-glow">
@@ -152,28 +183,6 @@
             </div>
             <h3>Our Strategy</h3>
             <p>To synchronize search authority (SEO), algorithmic bidding optimization (PPC), and conversion science (CRO) into a high-velocity client acquisition system.</p>
-          </div>
-        </div>
-      </div>
-      <div class="about-content">
-        <span class="section-subtitle">Who We Are</span>
-        <h2 class="section-title">Guiding Brands Through the <span class="text-gradient">Digital Noise</span></h2>
-        <p class="about-text">At Growth Beacon, we don't believe in marketing guess-work. We operate as an extension of your growth team, engineered to illuminate clear, predictable pathways to customer acquisition.</p>
-        <p class="about-text">Our philosophy is built on absolute transparency, unit-economic focus, and rapid execution. We combine content intelligence, algorithmic bidding optimization, and conversion science to scale enterprise leads and revenue.</p>
-        <div class="about-values">
-          <div class="value-item">
-            <span class="value-icon">✓</span>
-            <div>
-              <h4>Data Integrity</h4>
-              <p>Vanity metrics don't pay bills. We align campaigns with your actual CRM bottom line.</p>
-            </div>
-          </div>
-          <div class="value-item">
-            <span class="value-icon">✓</span>
-            <div>
-              <h4>Agile Velocity</h4>
-              <p>We launch, test, and iterate marketing strategies at startup speed.</p>
-            </div>
           </div>
         </div>
       </div>
@@ -435,15 +444,54 @@
             <input type="text" id="contact-company" name="company" placeholder=" ">
             <label for="contact-company">Company Name</label>
           </div>
-          <div class="form-group">
-            <select id="contact-service" name="service" required>
-              <option value="" disabled selected hidden></option>
-              <option value="seo">Enterprise SEO</option>
-              <option value="ppc">Paid Acquisition (PPC)</option>
-              <option value="cro">Conversion Optimization (CRO)</option>
-              <option value="all">Full scale Marketing Audit</option>
-            </select>
-            <label for="contact-service" class="select-label">Interested Service</label>
+          <div class="form-group custom-multiselect" id="multiselect-container">
+            <div class="multiselect-select-box" id="select-box-trigger">
+              <span class="multiselect-placeholder" id="select-box-value">Select Services of Interest</span>
+              <div class="select-box-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+                  <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+            
+            <div class="multiselect-dropdown" id="multiselect-dropdown-menu">
+              <label class="multiselect-option">
+                <input type="checkbox" name="services" value="Social Media" class="multiselect-checkbox">
+                <span class="option-custom-box"></span>
+                <span class="option-label-text">Social Media Management</span>
+              </label>
+              <label class="multiselect-option">
+                <input type="checkbox" name="services" value="SEO" class="multiselect-checkbox">
+                <span class="option-custom-box"></span>
+                <span class="option-label-text">SEO Services</span>
+              </label>
+              <label class="multiselect-option">
+                <input type="checkbox" name="services" value="Paid Ads" class="multiselect-checkbox">
+                <span class="option-custom-box"></span>
+                <span class="option-label-text">Paid Ads (Meta / Google)</span>
+              </label>
+              <label class="multiselect-option">
+                <input type="checkbox" name="services" value="Branding" class="multiselect-checkbox">
+                <span class="option-custom-box"></span>
+                <span class="option-label-text">Branding & Logo Design</span>
+              </label>
+              <label class="multiselect-option">
+                <input type="checkbox" name="services" value="Video Reels" class="multiselect-checkbox">
+                <span class="option-custom-box"></span>
+                <span class="option-label-text">Video Reels Marketing</span>
+              </label>
+              <label class="multiselect-option">
+                <input type="checkbox" name="services" value="WhatsApp Automation" class="multiselect-checkbox">
+                <span class="option-custom-box"></span>
+                <span class="option-label-text">WhatsApp Automation</span>
+              </label>
+              <label class="multiselect-option">
+                <input type="checkbox" name="services" value="Web Dev" class="multiselect-checkbox">
+                <span class="option-custom-box"></span>
+                <span class="option-label-text">Website Development</span>
+              </label>
+            </div>
+            <label class="select-label" style="position: absolute; top: -12px; left: 0; font-size: 0.8rem; color: var(--cyan-glow); pointer-events: none;">Interested Services</label>
           </div>
           <div class="form-group">
             <textarea id="contact-message" name="message" rows="4" placeholder=" " required></textarea>
@@ -511,6 +559,8 @@
     </div>
   </footer>
 
+  </div> <!-- End Page Wrapper -->
+
   <!-- Service Details Modal Overlay -->
   <div class="modal-overlay" id="service-modal-overlay">
     <div class="modal-box">
@@ -529,7 +579,35 @@
     </div>
   </div>
 
+  <!-- App-Style Mobile Bottom Navigation Tab Bar -->
+  <nav class="mobile-bottom-nav">
+    <a href="#home" class="mobile-nav-item active" data-nav-section="home">
+      <svg class="mobile-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+      </svg>
+      <span>Home</span>
+    </a>
+    <a href="#services" class="mobile-nav-item" data-nav-section="services">
+      <svg class="mobile-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+      </svg>
+      <span>Services</span>
+    </a>
+    <a href="#pricing" class="mobile-nav-item" data-nav-section="pricing">
+      <svg class="mobile-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2zM9 16h6m-6-4h6m-6-4h6"></path>
+      </svg>
+      <span>Pricing</span>
+    </a>
+    <a href="#contact" class="mobile-nav-item" data-nav-section="contact">
+      <svg class="mobile-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+      </svg>
+      <span>Contact</span>
+    </a>
+  </nav>
+
   <!-- Script link -->
-  <script src="script.js?v=6"></script>
+  <script src="script.js?v=9"></script>
 </body>
 </html>

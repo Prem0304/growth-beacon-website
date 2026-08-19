@@ -13,26 +13,75 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================================================
-  // Mobile Nav Toggle
+  // App-Style Mobile Bottom Navigation Tab Bar (Concept 1)
   // ==========================================================================
-  const mobileToggle = document.getElementById('mobile-toggle');
-  const mainNav = document.getElementById('main-nav');
+  const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
   
-  if (mobileToggle && mainNav) {
-    mobileToggle.addEventListener('click', () => {
-      mobileToggle.classList.toggle('active');
-      mainNav.classList.toggle('active');
-    });
-
-    // Close mobile menu when clicking nav links
-    const navLinks = document.querySelectorAll('.nav-link, .nav-btn');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mobileToggle.classList.remove('active');
-        mainNav.classList.remove('active');
+  if (mobileNavItems.length > 0) {
+    // 1. Smooth scrolling click handler for bottom nav links
+    mobileNavItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = item.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+          // Remove active from all items and set current to active
+          mobileNavItems.forEach(nav => nav.classList.remove('active'));
+          item.classList.add('active');
+          
+          // Scroll to section with header offset
+          const headerHeight = document.querySelector('.header').offsetHeight;
+          const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
       });
     });
+
+    // 2. Scroll Spy: Auto-highlight bottom navigation tab item in view
+    const sections = document.querySelectorAll('section[id]');
+    const sectionIdMap = {
+      'home': 'home',
+      'about': 'home',
+      'services': 'services',
+      'pricing': 'pricing',
+      'testimonials': 'services',
+      'contact': 'contact'
+    };
+
+    const observerOptions = {
+      root: null,
+      threshold: 0.25,
+      rootMargin: '-80px 0px 0px 0px'
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.getAttribute('id');
+          const mappedId = sectionIdMap[sectionId];
+          
+          if (mappedId) {
+            const targetNavItem = document.querySelector(`.mobile-nav-item[href="#${mappedId}"]`);
+            if (targetNavItem) {
+              mobileNavItems.forEach(nav => nav.classList.remove('active'));
+              targetNavItem.classList.add('active');
+            }
+          }
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => {
+      sectionObserver.observe(section);
+    });
   }
+
+
 
   // ==========================================================================
   // Scroll Reveal Animations
@@ -144,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: formData.get("name"),
             email: formData.get("email"),
             company: formData.get("company") || "N/A",
-            service: formData.get("service"),
+            service: formData.getAll("services").join(", ") || "N/A",
             message: formData.get("message"),
             status: "New",
             notes: "",
@@ -328,6 +377,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  // Helper to format currency symbol beautifully
+  const formatPrice = (priceStr) => {
+    if (!priceStr) return '';
+    const numOnly = priceStr.replace('₹', '');
+    return `<span class="price-currency">₹</span>${numOnly}`;
+  };
+
   // Helper to generate pricing cards HTML
   const buildPricingCardsHTML = (serviceData) => {
     return `
@@ -338,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <p>${serviceData.basic.desc}</p>
         </div>
         <div class="price-amount-wrapper">
-          <span class="price-amount-val">${serviceData.basic.price}</span>
+          <span class="price-amount-val">${formatPrice(serviceData.basic.price)}</span>
           <span class="price-amount-period">${serviceData.basic.period}</span>
         </div>
         <ul class="price-features-list">
@@ -355,7 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <p>${serviceData.standard.desc}</p>
         </div>
         <div class="price-amount-wrapper">
-          <span class="price-amount-val">${serviceData.standard.price}</span>
+          <span class="price-amount-val">${formatPrice(serviceData.standard.price)}</span>
           <span class="price-amount-period">${serviceData.standard.period}</span>
         </div>
         <ul class="price-features-list">
@@ -371,7 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <p>${serviceData.premium.desc}</p>
         </div>
         <div class="price-amount-wrapper">
-          <span class="price-amount-val">${serviceData.premium.price}</span>
+          <span class="price-amount-val">${formatPrice(serviceData.premium.price)}</span>
           <span class="price-amount-period">${serviceData.premium.period}</span>
         </div>
         <ul class="price-features-list">
@@ -486,6 +542,51 @@ document.addEventListener('DOMContentLoaded', () => {
   if (serviceModal) {
     serviceModal.addEventListener('click', (e) => {
       if (e.target === serviceModal) closeServicePricingModal();
+    });
+  }
+
+  // ==========================================================================
+  // Custom Multi-Select Dropdown Box Logic
+  // ==========================================================================
+  const multiselectContainer = document.getElementById('multiselect-container');
+  const selectTrigger = document.getElementById('select-box-trigger');
+  const selectValue = document.getElementById('select-box-value');
+  
+  if (multiselectContainer && selectTrigger && selectValue) {
+    // Open/Close toggle
+    selectTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      multiselectContainer.classList.toggle('open');
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!multiselectContainer.contains(e.target)) {
+        multiselectContainer.classList.remove('open');
+      }
+    });
+
+    // Handle checkboxes selections and display values list
+    const multiselectCheckboxes = multiselectContainer.querySelectorAll('.multiselect-checkbox');
+    const updateDropdownText = () => {
+      const selected = [];
+      multiselectCheckboxes.forEach(cb => {
+        if (cb.checked) {
+          selected.push(cb.value);
+        }
+      });
+      
+      if (selected.length > 0) {
+        selectValue.textContent = selected.join(', ');
+        selectValue.style.color = 'var(--color-white)';
+      } else {
+        selectValue.textContent = 'Select Services of Interest';
+        selectValue.style.color = 'var(--color-text-muted)';
+      }
+    };
+
+    multiselectCheckboxes.forEach(cb => {
+      cb.addEventListener('change', updateDropdownText);
     });
   }
 });

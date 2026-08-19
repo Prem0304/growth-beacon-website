@@ -444,6 +444,7 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 16px;
   overflow: hidden;
+  overflow-x: auto;
   box-shadow: var(--glass-shadow);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -970,22 +971,50 @@ body {
   
   .crm-sidebar {
     width: 100%;
-    padding: 1.5rem;
+    padding: 1.25rem 1rem;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
+    align-items: center;
+    gap: 1rem;
   }
   
   .sidebar-brand {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .sidebar-menu {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    width: 100%;
+    gap: 8px;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+  }
+  
+  .sidebar-menu::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .sidebar-menu li {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  
+  .sidebar-link {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    white-space: nowrap;
   }
   
   .crm-main {
-    padding: 2rem;
+    padding: 1.5rem 1rem;
   }
   
   .control-bar {
     flex-direction: column;
     align-items: stretch;
+    gap: 1rem;
   }
   
   .search-box {
@@ -994,6 +1023,12 @@ body {
   
   .filter-group {
     flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .modal-grid-info {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
 
