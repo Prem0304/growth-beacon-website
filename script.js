@@ -204,6 +204,14 @@ document.addEventListener('DOMContentLoaded', () => {
           localLeads.unshift(localLead);
           localStorage.setItem("gb_crm_leads", JSON.stringify(localLeads));
 
+          // Track GA4 conversion event
+          if (typeof gtag === 'function') {
+            gtag('event', 'generate_lead', {
+              'event_category': 'engagement',
+              'event_label': 'Contact Form Lead'
+            });
+          }
+
           // Fade out form and display success block
           contactForm.style.opacity = '0';
           contactForm.style.transform = 'translateY(-20px)';
