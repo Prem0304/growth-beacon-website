@@ -712,6 +712,18 @@ document.addEventListener('DOMContentLoaded', () => {
       ticketClientSelect.appendChild(opt2);
     });
 
+    // Populate SOW contract client selector
+    const contractSelect = document.getElementById('contract-client-select');
+    if (contractSelect) {
+      contractSelect.innerHTML = '';
+      activeClients.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.textContent = `${c.company} (${c.name})`;
+        contractSelect.appendChild(opt);
+      });
+    }
+
     // Render Invoices
     financeInvoicesTbody.innerHTML = '';
     invoices.forEach(inv => {
@@ -935,6 +947,51 @@ document.addEventListener('DOMContentLoaded', () => {
     
     modalStatusSelect.value = lead.status;
     modalNotesArea.value = lead.notes || '';
+
+    // Generate AI SDR Ratings and Pitches
+    let dealValue = lead.val || 25000;
+    let prob = lead.probability || 35;
+    let rating = "WARM";
+    if (dealValue >= 45000) {
+      rating = "HOT";
+      prob = Math.max(prob, 70);
+    } else if (dealValue <= 20000) {
+      rating = "COLD";
+      prob = Math.min(prob, 25);
+    }
+    
+    const ratingEl = document.getElementById('modal-ai-rating');
+    ratingEl.textContent = rating;
+    ratingEl.style.color = rating === 'HOT' ? 'var(--status-won)' : (rating === 'WARM' ? 'var(--status-contacted)' : 'var(--status-lost)');
+    document.getElementById('modal-ai-deal-value').textContent = `₹${dealValue.toLocaleString('en-IN')}/mo`;
+    document.getElementById('modal-ai-probability').textContent = `${prob}%`;
+
+    // Email Copy Handler
+    const emailPitch = `Subject: Tailored Growth Audit for ${lead.company} — Growth Beacon\n\nHi ${lead.name},\n\nI reviewed your inquiry for ${lead.service} at ${lead.company}.\n\nBased on a quick audit of your digital intent profile in South Tamil Nadu, we see immense potential to scale your client acquisition channels. Specifically, for ${lead.service}, we recommend a localized targeting strategy focused on high-conversion cohorts.\n\nLet's coordinate a quick 10-minute strategy call. Settle your calendar slot here: http://localhost:8000/client.html?id=${lead.id}\n\nBest regards,\nPremkumar\nFounder, Growth Beacon`;
+
+    const whatsappPitch = `Hi ${lead.name}! Premkumar here from Growth Beacon. I reviewed your inquiry for ${lead.service} for your brand ${lead.company}. I've compiled a quick localized SEO/Ads audit blueprint for you. When are you free for a brief call this week? Read your dashboard details here: http://localhost:8000/client.html?id=${lead.id}`;
+
+    // Click triggers
+    const btnEmail = document.getElementById('btn-copy-ai-email');
+    const btnWhatsapp = document.getElementById('btn-copy-ai-whatsapp');
+
+    // Remove old listeners to avoid stacking
+    const newBtnEmail = btnEmail.cloneNode(true);
+    const newBtnWhatsapp = btnWhatsapp.cloneNode(true);
+    btnEmail.parentNode.replaceChild(newBtnEmail, btnEmail);
+    btnWhatsapp.parentNode.replaceChild(newBtnWhatsapp, btnWhatsapp);
+
+    newBtnEmail.addEventListener('click', () => {
+      navigator.clipboard.writeText(emailPitch);
+      newBtnEmail.textContent = "✓ Email Pitch Copied!";
+      setTimeout(() => { newBtnEmail.textContent = "📧 Copy AI Drafted Email Pitch"; }, 2000);
+    });
+
+    newBtnWhatsapp.addEventListener('click', () => {
+      navigator.clipboard.writeText(whatsappPitch);
+      newBtnWhatsapp.textContent = "✓ WhatsApp Pitch Copied!";
+      setTimeout(() => { newBtnWhatsapp.textContent = "💬 Copy AI Drafted WhatsApp Follow-up (English & Tamil)"; }, 2000);
+    });
 
     modalOverlay.classList.add('active');
   };
@@ -1161,6 +1218,245 @@ document.addEventListener('DOMContentLoaded', () => {
       aiChatLogs.scrollTop = aiChatLogs.scrollHeight;
     });
   });
+
+  // ==========================================================================
+  // Workspace Extensions & Boardroom Simulation Event Binds
+  // ==========================================================================
+
+  // 1. Competitor Strategy Analyst
+  const btnRunCompetitor = document.getElementById('btn-run-competitor-audit');
+  const competitorUrlInput = document.getElementById('workspace-competitor-url');
+  const competitorReportBox = document.getElementById('competitor-audit-report');
+
+  if (btnRunCompetitor && competitorUrlInput && competitorReportBox) {
+    btnRunCompetitor.addEventListener('click', () => {
+      const url = competitorUrlInput.value.trim();
+      if (!url) return;
+
+      btnRunCompetitor.textContent = "Analyzing...";
+      btnRunCompetitor.disabled = true;
+      competitorReportBox.style.display = 'none';
+
+      setTimeout(() => {
+        btnRunCompetitor.textContent = "Analyze";
+        btnRunCompetitor.disabled = false;
+        competitorReportBox.style.display = 'block';
+
+        competitorReportBox.innerHTML = `
+          <strong style="color: var(--cyan-glow); display:block; margin-bottom: 8px;">📊 Competitive Edge Report: ${url}</strong>
+          • <strong>Target Keyword Gaps:</strong> Competitor is ranking in top 5 for <i>'SEO services Theni'</i> and <i>'digital marketing agency Madurai'</i>. Missing focus on long-tail local manufacturer searches.<br>
+          • <strong>PPC Media Spend Estimate:</strong> Budgeting approx. ₹15,000/mo on localized Meta ads.<br>
+          • <strong>SEO Speed Audit:</strong> Domain has a Lighthouse score of 62. Our client speeds (Growth Beacon engines) outperform them by 40%. Highlight page load speeds in sales pitches!<br>
+          • <strong>Action Item:</strong> Deploy local language schema markup to claim local maps pack supremacy.
+        `;
+        logAction(`AI Competitor analysis generated for: ${url}`);
+      }, 1500);
+    });
+  }
+
+  // 2. Creative Content Copilot
+  const btnRunCopilot = document.getElementById('btn-run-copilot');
+  const copilotTopic = document.getElementById('copilot-topic');
+  const copilotChannel = document.getElementById('copilot-channel');
+  const copilotOutput = document.getElementById('copilot-output-box');
+
+  if (btnRunCopilot && copilotTopic && copilotChannel && copilotOutput) {
+    btnRunCopilot.addEventListener('click', () => {
+      const topic = copilotTopic.value.trim();
+      const channel = copilotChannel.value;
+      if (!topic) return;
+
+      btnRunCopilot.textContent = "Generating...";
+      btnRunCopilot.disabled = true;
+      copilotOutput.style.display = 'none';
+
+      setTimeout(() => {
+        btnRunCopilot.textContent = "Generate Marketing Assets";
+        btnRunCopilot.disabled = false;
+        copilotOutput.style.display = 'block';
+
+        let text = '';
+        if (channel === 'instagram') {
+          text = `✨ <strong>IG Reel Caption Draft:</strong>\n\nScale your showroom traffic in Madurai! 🚀 Stop relying on vanity likes. We built growth engines that turn views into walk-in buyers. 💰\n\nDM 'GROWTH' to claim your speed audit! 🗺️📍\n\n#MaduraiShowroom #SouthTamilNaduBusiness #GrowthBeacon #RegionalScaling`;
+        } else if (channel === 'ads') {
+          text = `🔍 <strong>Google Search Ad Draft:</strong>\n\nHeadline 1: Growth Beacon Agency Theni\nHeadline 2: #1 B2B SEO & Paid Ads Engine\nDescription: We optimize marketing funnels to scale leads by 3x. Geotargeted retail scaling across Tamil Nadu. Settle your free site audit call today!`;
+        } else {
+          text = `💬 <strong>WhatsApp Follow-up Draft:</strong>\n\nHi! Premkumar here from Growth Beacon. I reviewed your campaign topic: ${topic}. We prepared a localized SEO audit of your competitors in Coimbatore. Are you free for a 10-minute briefing tomorrow at 4 PM?`;
+        }
+
+        copilotOutput.innerHTML = text;
+        logAction(`AI Marketing content generated: ${topic} (${channel})`);
+      }, 1200);
+    });
+  }
+
+  // 3. Printable SOW Contract Builder
+  const btnPrintSow = document.getElementById('btn-print-sow');
+  const contractClientSelect = document.getElementById('contract-client-select');
+
+  if (btnPrintSow && contractClientSelect) {
+    btnPrintSow.addEventListener('click', () => {
+      const clientId = parseInt(contractClientSelect.value, 10);
+      const client = leads.find(c => c.id === clientId);
+      if (!client) {
+        alert("Please select a valid client.");
+        return;
+      }
+
+      const halfVal = (client.val || 30000) / 2;
+
+      // Open printable window context
+      const printWin = window.open('', '_blank');
+      printWin.document.write(`
+        <html>
+        <head>
+          <title>Scope of Work (SOW) Contract — ${client.company}</title>
+          <style>
+            body { font-family: 'Inter', sans-serif; color: #333; padding: 40px; line-height: 1.6; }
+            h1, h2 { font-family: 'Montserrat', sans-serif; color: #070B19; }
+            .header-bar { border-bottom: 2px solid #00F0FF; padding-bottom: 20px; margin-bottom: 30px; }
+            .metadata { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 30px; background: #f8f9fa; padding: 20px; border-radius: 8px; }
+            .section { margin-bottom: 25px; }
+            .signatures { display: grid; grid-template-columns: 1fr 1fr; margin-top: 50px; gap: 40px; }
+            .signature-line { border-top: 1px solid #777; margin-top: 60px; text-align: center; padding-top: 10px; }
+          </style>
+        </head>
+        <body onload="window.print()">
+          <div class="header-bar">
+            <h1>SCOPE OF WORK & SERVICE AGREEMENT</h1>
+            <p>Growth Beacon Digital Scaling Consulting Services</p>
+          </div>
+          
+           <div class="metadata">
+             <div>
+               <strong>AGENCY:</strong><br>
+               Growth Beacon Consulting LLP<br>
+               Bodinayakanur, Theni - 625513<br>
+               Tamil Nadu, India
+             </div>
+             <div>
+               <strong>CLIENT RETAINER ACCOUNT:</strong><br>
+               Company: ${client.company}<br>
+               Authorized Signee: ${client.name}<br>
+               Email: ${client.email}
+             </div>
+           </div>
+           
+           <div class="section">
+             <h2>1. Purpose & Scope</h2>
+             <p>This agreement outlines the optimization deliverables and digital strategy services provided to the Client. DELIVERABLES INCLUDE: keyword research outlines, local business schema deployments, technical SEO site auditing, Google/Meta campaign monitoring, and monthly MRR dashboard integrations.</p>
+           </div>
+           
+           <div class="section">
+             <h2>2. Fees & Payments</h2>
+             <p>The client agrees to pay a monthly retainer of <strong>₹${(client.val || 30000).toLocaleString('en-IN')}</strong>. Payment terms require a 50% deposit advance (₹${halfVal.toLocaleString('en-IN')}) upon contract execution, with the remaining 50% retainer balance due prior to live marketing campaigns launching.</p>
+           </div>
+           
+           <div class="section">
+             <h2>3. Term & Termination</h2>
+             <p>This agreement operates on a rolling month-to-month basis. Either party may terminate with 30 days written notice. Retainers already committed to active paid ads accounts are non-refundable.</p>
+           </div>
+           
+           <div class="signatures">
+             <div class="signature-line">
+               Authorized Signee, Growth Beacon (Premkumar)
+             </div>
+             <div class="signature-line">
+               Authorized Signee, Client (${client.name})
+             </div>
+           </div>
+        </body>
+        </html>
+      `);
+      printWin.document.close();
+      logAction(`SOW contract document generated for client: ${client.company}`);
+    });
+  }
+
+  // 4. AI Strategy Boardroom Simulator
+  const btnRunBoardroom = document.getElementById('btn-run-boardroom');
+  const boardroomGoalInput = document.getElementById('boardroom-goal-input');
+  const boardroomChecklist = document.getElementById('boardroom-action-checklist');
+  const boardroomChecklistItems = document.getElementById('boardroom-checklist-items');
+
+  if (btnRunBoardroom && boardroomGoalInput && boardroomChecklist && boardroomChecklistItems) {
+    btnRunBoardroom.addEventListener('click', () => {
+      const goal = boardroomGoalInput.value.trim();
+      if (!goal) return;
+
+      btnRunBoardroom.textContent = "Brainstorming...";
+      btnRunBoardroom.disabled = true;
+      boardroomChecklist.style.display = 'none';
+
+      // Clear AI logs container to print sequential agent logs
+      aiChatLogs.innerHTML = `
+        <div style="background: rgba(0, 240, 255, 0.05); border: 1px solid var(--border-color); padding: 12px 14px; border-radius: 8px; font-size: 0.82rem; color: var(--cyan-glow); line-height: 1.5; text-align: center; font-weight: 600; margin-bottom: 12px;">
+          👥 Active strategy Session: "${goal}"
+        </div>
+      `;
+
+      const messages = [
+        {
+          agent: 'AI Sales SDR SDR',
+          text: `Analyzing regional opportunities for target client brief: <strong>"${goal}"</strong>. I estimate average projected package value at ₹45,000/mo retainer with a 75% lead score rating based on local intent indexing.`
+        },
+        {
+          agent: 'AI SEO Specialist',
+          text: `Audit complete. Organic search queries for this segment in South Tamil Nadu (Coimbatore, Madurai, Theni) show huge content gaps. We should prioritize local business schema mapping and target local language search behaviors.`
+        },
+        {
+          agent: 'AI Media Buyer',
+          text: `Agreed! I recommend geotargeting high-density retail clusters within 15km radii of showroom sites on Meta channels. Allocating 60% budget to mobile video reels will maximize click-through ratios.`
+        },
+        {
+          agent: 'AI Account Manager',
+          text: `onboarding scope locked! I have compiled these parameters into our centralized Client Workspace and created campaign checklist tasks in the database.`
+        }
+      ];
+
+      let msgIdx = 0;
+      const printNextMessage = () => {
+        if (msgIdx < messages.length) {
+          const msg = messages[msgIdx];
+          const chatBubble = document.createElement('div');
+          
+          let borderCol = 'var(--cyan-glow)';
+          let bgCol = 'rgba(255, 255, 255, 0.02)';
+          if (msg.agent.includes('SDR')) { borderCol = 'var(--status-new)'; }
+          else if (msg.agent.includes('SEO')) { borderCol = '#5bb3ff'; }
+          else if (msg.agent.includes('Media')) { borderCol = 'var(--gold-accent)'; }
+          else if (msg.agent.includes('Manager')) { borderCol = 'var(--status-won)'; }
+
+          chatBubble.className = 'ai-bubble-system';
+          chatBubble.style.borderLeft = `3px solid ${borderCol}`;
+          chatBubble.style.background = bgCol;
+          chatBubble.style.marginBottom = '12px';
+          chatBubble.innerHTML = `<strong>${msg.agent}:</strong> ${msg.text}`;
+          
+          aiChatLogs.appendChild(chatBubble);
+          aiChatLogs.scrollTop = aiChatLogs.scrollHeight;
+          
+          msgIdx++;
+          setTimeout(printNextMessage, 1500);
+        } else {
+          // Completed Strategy Brainstorm!
+          btnRunBoardroom.textContent = "Run Strategy Brainstorm";
+          btnRunBoardroom.disabled = false;
+          boardroomChecklist.style.display = 'block';
+          boardroomChecklistItems.innerHTML = `
+            • [ ] <b>SEO:</b> Deploy regional local maps schema for "${goal}"<br>
+            • [ ] <b>Ads:</b> Set up Meta geotargeted campaign sets (₹20,000 budget)<br>
+            • [ ] <b>AM:</b> Launch custom Workspace brief portal URL<br>
+            • [ ] <b>Content:</b> Queue 3 mobile video reel ad scripts
+          `;
+          logAction(`Simulated Strategy Boardroom consultation complete for: ${goal}`);
+        }
+      };
+
+      // Start sequential dialog
+      setTimeout(printNextMessage, 500);
+    });
+  }
 
   // Initial checks and loads
   checkAuth();

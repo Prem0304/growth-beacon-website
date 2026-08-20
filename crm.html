@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
   <!-- Styles -->
-  <link rel="stylesheet" href="crm.css?v=6">
+  <link rel="stylesheet" href="crm.css?v=7">
 </head>
 <body>
 
@@ -391,6 +391,54 @@
             </div>
           </div>
         </div>
+
+        <!-- AI Workspace Extension Tools -->
+        <div class="dashboard-grid" style="margin-top: 2rem;">
+          <!-- Left Column: AI Competitor Strategy Analyst -->
+          <div class="dashboard-left">
+            <div class="widget-card">
+              <h3 class="card-title" style="margin-bottom: 1rem; color: var(--cyan-glow);">🔍 AI Competitor Strategy Analyst</h3>
+              <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">Enter a client's competitor URL to generate an organic SEO search visibility edge report.</p>
+              <div style="display: flex; gap: 8px; margin-bottom: 1.25rem;">
+                <input type="text" id="workspace-competitor-url" placeholder="Competitor Domain (e.g. competitor.com)" style="flex-grow:1; background: rgba(7,11,25,0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--color-white); font-size: 0.85rem;">
+                <button class="btn-primary" id="btn-run-competitor-audit" style="width: auto; padding: 0 15px; font-size: 0.85rem;">Analyze</button>
+              </div>
+              <div id="competitor-audit-report" style="display: none; background: rgba(7,11,25,0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.25rem; max-height: 220px; overflow-y: auto; font-size: 0.82rem; line-height: 1.6;">
+                <!-- Generated dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: AI Creative Copilot & Contract Architect -->
+          <div class="dashboard-right">
+            <div class="widget-card">
+              <h3 class="card-title" style="margin-bottom: 1rem; color: var(--gold-accent);">✍️ AI Creative Copilot & Contract Builder</h3>
+              <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">Generate localized Instagram captions and print milestone contracts instantly.</p>
+              
+              <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.25rem;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                  <input type="text" id="copilot-topic" placeholder="Campaign Topic (e.g. Silk Showroom)" style="background: rgba(7,11,25,0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; color: var(--color-white); font-size: 0.8rem; height: 38px;">
+                  <select class="select-filter" id="copilot-channel" style="height: 38px; font-size: 0.8rem;">
+                    <option value="instagram">Instagram Reel Caption</option>
+                    <option value="ads">Google Search Ad Copy</option>
+                    <option value="whatsapp">Outreach WhatsApp Pitch</option>
+                  </select>
+                </div>
+                <button class="btn-primary" id="btn-run-copilot" style="font-size: 0.8rem; padding: 8px 12px; width: 100%;">Generate Marketing Assets</button>
+              </div>
+              
+              <div id="copilot-output-box" style="display: none; background: rgba(7,11,25,0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem; margin-bottom: 1.25rem; font-size: 0.82rem; line-height: 1.5; white-space: pre-line;">
+                <!-- Generated dynamically -->
+              </div>
+
+              <!-- Contract builder -->
+              <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1rem; display: flex; gap: 8px; align-items: center;">
+                <select class="select-filter" id="contract-client-select" style="flex-grow: 1; height: 38px; font-size: 0.8rem;"></select>
+                <button class="btn-secondary" id="btn-print-sow" style="font-size: 0.8rem; height: 38px; padding: 0 15px; border-color: var(--cyan-glow); color: var(--cyan-glow); background: transparent;">📄 Generate SOW Contract</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ==========================================================================
@@ -418,15 +466,22 @@
             </div>
           </div>
 
-          <!-- Right: Quick recommendation prompts -->
+          <!-- Right: AI Strategy Boardroom -->
           <div class="dashboard-right">
-            <div class="widget-card">
-              <h3 class="card-title">Quick AI Queries</h3>
-              <div style="display: flex; flex-direction: column; gap: 10px;">
-                <button class="btn-secondary btn-ai-prompt" data-prompt="Which clients are at risk of leaving?" style="text-align: left; font-size: 0.8rem; justify-content: flex-start; padding: 12px;">📊 Which clients are at risk of leaving?</button>
-                <button class="btn-secondary btn-ai-prompt" data-prompt="Suggest SEO keywords for Digital Marketing" style="text-align: left; font-size: 0.8rem; justify-content: flex-start; padding: 12px;">🔍 Suggest SEO keywords for Digital Marketing</button>
-                <button class="btn-secondary btn-ai-prompt" data-prompt="Generate Instagram caption for brand growth" style="text-align: left; font-size: 0.8rem; justify-content: flex-start; padding: 12px;">📱 Generate Instagram caption for brand growth</button>
-                <button class="btn-secondary btn-ai-prompt" data-prompt="Predict lead conversion probability" style="text-align: left; font-size: 0.8rem; justify-content: flex-start; padding: 12px;">📈 Predict lead conversion probability</button>
+            <div class="widget-card" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 380px;">
+              <div>
+                <h3 class="card-title" style="color: var(--cyan-glow); margin-bottom: 0.5rem;">👥 AI Strategy Boardroom</h3>
+                <p style="font-size: 0.78rem; color: var(--color-text-muted); margin-bottom: 1.25rem;">Trigger a collaborative marketing brainstorm between all agency AI agents.</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 1rem;">
+                  <input type="text" id="boardroom-goal-input" placeholder="Boardroom Goal (e.g. Madurai Silk Showroom)" style="background: rgba(7,11,25,0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--color-white); font-size: 0.8rem; height: 38px; outline: none;">
+                  <button class="btn-primary" id="btn-run-boardroom" style="font-size: 0.8rem; padding: 8px; height: 38px;">Run Strategy Brainstorm</button>
+                </div>
+              </div>
+              
+              <div id="boardroom-action-checklist" style="display: none; background: rgba(7, 11, 25, 0.4); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem; font-size: 0.8rem; line-height: 1.6; max-height: 180px; overflow-y: auto;">
+                <strong style="color: var(--cyan-glow); display: block; margin-bottom: 6px;">📋 Actionable Campaign SOW:</strong>
+                <div id="boardroom-checklist-items" style="color: var(--color-text-main);"></div>
               </div>
             </div>
           </div>
@@ -621,6 +676,35 @@
         <div class="notes-editor">
           <label for="modal-notes-area">Internal Notes & Action History</label>
           <textarea id="modal-notes-area" rows="4" placeholder="Type internal deal progress history notes..."></textarea>
+        </div>
+
+        <!-- AI Sales SDR Agent Panel -->
+        <div class="ai-sdr-panel" style="margin-top: 1.5rem; background: rgba(0, 240, 255, 0.03); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem;">
+          <h4 style="font-family: 'Montserrat', sans-serif; font-size: 0.95rem; color: var(--cyan-glow); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
+            <span>🤖</span> Gemini AI SDR Assistant
+          </h4>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem;" class="sdr-grid-cols">
+            <div class="info-block">
+              <span>AI Lead Rating</span>
+              <p id="modal-ai-rating" style="font-weight: 700; color: var(--cyan-glow);">-</p>
+            </div>
+            <div class="info-block">
+              <span>Est. Deal Value (MRR)</span>
+              <p id="modal-ai-deal-value" style="font-weight: 700; color: var(--gold-accent);">-</p>
+            </div>
+            <div class="info-block">
+              <span>Conversion Chance</span>
+              <p id="modal-ai-probability" style="font-weight: 700; color: var(--status-won);">-</p>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <button class="btn-secondary" id="btn-copy-ai-email" style="font-size: 0.8rem; padding: 10px; justify-content: flex-start; text-align: left; background: rgba(255,255,255,0.02); width: 100%;">
+              📧 Copy AI Drafted Email Pitch
+            </button>
+            <button class="btn-secondary" id="btn-copy-ai-whatsapp" style="font-size: 0.8rem; padding: 10px; justify-content: flex-start; text-align: left; background: rgba(255,255,255,0.02); width: 100%;">
+              💬 Copy AI Drafted WhatsApp Follow-up (English & Tamil)
+            </button>
+          </div>
         </div>
       </div>
 

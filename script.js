@@ -173,6 +173,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const originalText = btnText.textContent;
       btnText.textContent = 'Transmitting...';
 
+      // Check if at least one service is selected from the custom dropdown
+      const checkedServices = contactForm.querySelectorAll('.multiselect-checkbox:checked');
+      if (checkedServices.length === 0) {
+        alert("Please select at least one interested service from the dropdown.");
+        submitBtn.classList.remove('submitting');
+        submitBtn.disabled = false;
+        btnText.textContent = originalText;
+        return; // Halt form submission
+      }
+
       const formData = new FormData(contactForm);
       
       // Access Key for Web3Forms (Replace with your actual key from https://web3forms.com)
@@ -192,7 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
             id: Date.now(),
             name: formData.get("name"),
             email: formData.get("email"),
-            company: formData.get("company") || "N/A",
+            phone: formData.get("phone"),
+            company: formData.get("company"),
             service: formData.getAll("services").join(", ") || "N/A",
             message: formData.get("message"),
             status: "New",
@@ -217,6 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
           contactForm.style.transform = 'translateY(-20px)';
           setTimeout(() => {
             contactForm.style.display = 'none';
+            formSuccess.style.display = 'flex';
+            formSuccess.offsetHeight; // Force layout recalculation (reflow) for smooth transition
             formSuccess.classList.add('active');
           }, 400);
         } else {

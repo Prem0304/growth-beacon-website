@@ -474,7 +474,7 @@ h1, h2, h3, h4 {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 16px;
-  padding: 3rem 2rem;
+  padding: 3rem 2rem 4.5rem 2rem;
   text-align: left;
   transition: var(--transition-smooth);
   backdrop-filter: blur(12px);
@@ -495,11 +495,32 @@ h1, h2, h3, h4 {
   transition: var(--transition-smooth);
 }
 
+.service-card::after {
+  content: 'Explore Packages →';
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--cyan-glow);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
 .service-card:hover {
   background: var(--bg-card-hover);
   border-color: var(--border-color-hover);
   transform: translateY(-8px);
   box-shadow: var(--glass-shadow), var(--cyan-glow-shadow);
+}
+
+.service-card:hover::after {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .service-card:hover::before {
@@ -566,7 +587,20 @@ h1, h2, h3, h4 {
 
 .about-content {
   max-width: 900px;
-  margin: 0 auto 4rem auto;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-text-minimal {
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  line-height: 1.8;
+  font-weight: 400;
+  text-align: center;
+  max-width: 800px;
+  margin: 2.25rem auto 0 auto;
+  opacity: 0.95;
 }
 
 .about-stats-grid {
@@ -1392,27 +1426,22 @@ h1, h2, h3, h4 {
 
 /* Success submission state */
 .form-success-message {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 3rem;
+  padding: 3rem 1.5rem;
   text-align: center;
-  background: #0C1125;
+  min-height: 420px;
+  width: 100%;
   opacity: 0;
-  pointer-events: none;
   transform: scale(0.95);
   transition: opacity 0.4s ease, transform 0.4s ease;
+  box-sizing: border-box;
 }
 
 .form-success-message.active {
   opacity: 1;
-  pointer-events: auto;
   transform: scale(1);
 }
 
@@ -1467,6 +1496,75 @@ h1, h2, h3, h4 {
   margin-bottom: 4rem;
 }
 
+.footer-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  margin-top: 1.5rem;
+}
+
+.footer-contact-list .contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.footer-contact-list .icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--color-text-muted);
+  transition: all 0.3s ease;
+}
+
+.footer-contact-icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+  transition: all 0.3s ease;
+}
+
+/* Individual Channel Hover Behaviors */
+.footer-contact-list .contact-link:hover {
+  color: var(--color-white);
+}
+
+.footer-contact-list .instagram-link:hover .icon-badge {
+  background: rgba(225, 48, 108, 0.1);
+  border-color: rgba(225, 48, 108, 0.3);
+  color: #e1306c;
+  box-shadow: 0 0 10px rgba(225, 48, 108, 0.2);
+}
+
+.footer-contact-list .whatsapp-link:hover .icon-badge {
+  background: rgba(37, 211, 102, 0.1);
+  border-color: rgba(37, 211, 102, 0.3);
+  color: #25d366;
+  box-shadow: 0 0 10px rgba(37, 211, 102, 0.2);
+}
+
+.footer-contact-list .phone-link:hover .icon-badge {
+  background: rgba(0, 240, 255, 0.1);
+  border-color: rgba(0, 240, 255, 0.3);
+  color: var(--cyan-glow);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.footer-contact-list .contact-link:hover span:last-child {
+  padding-left: 4px;
+  color: var(--color-white);
+  transition: padding 0.3s ease;
+}
+
 .footer-brand .logo-container {
   margin-bottom: 1.5rem;
 }
@@ -1478,7 +1576,7 @@ h1, h2, h3, h4 {
 }
 
 .footer-links h4,
-.footer-newsletter h4 {
+.footer-contact-info h4 {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
   position: relative;
@@ -1486,7 +1584,7 @@ h1, h2, h3, h4 {
 }
 
 .footer-links h4::after,
-.footer-newsletter h4::after {
+.footer-contact-info h4::after {
   content: '';
   position: absolute;
   bottom: -6px;
@@ -1825,13 +1923,13 @@ h1, h2, h3, h4 {
     gap: 0;
   }
   
+  .footer-section {
+    padding-bottom: 7.5rem !important;
+  }
+
   .footer-container {
     grid-template-columns: 1fr;
     gap: 2rem;
-  }
-  
-  .footer-newsletter {
-    grid-column: span 1;
   }
   
   .footer-bottom {
@@ -1843,6 +1941,11 @@ h1, h2, h3, h4 {
 
   .footer-policy-links {
     justify-content: center;
+  }
+
+  .service-card::after {
+    opacity: 0.85 !important;
+    transform: translateY(0) !important;
   }
 }
 
