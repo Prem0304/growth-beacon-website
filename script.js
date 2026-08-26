@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       header.classList.remove('scrolled');
     }
-  });
+  }, { passive: true });
 
   // ==========================================================================
   // App-Style Mobile Bottom Navigation Tab Bar
