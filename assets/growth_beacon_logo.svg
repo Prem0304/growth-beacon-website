@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <!-- Deep premium background -->
+  <rect width="800" height="800" fill="#0B0F19" rx="32" />
+  
+  <defs>
+    <!-- Cyan/Blue progressive gradients for the 3 growth bars -->
+    <linearGradient id="bar1Grad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#0F2027" />
+      <stop offset="100%" stop-color="#203A43" />
+    </linearGradient>
+    
+    <linearGradient id="bar2Grad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#0052D4" />
+      <stop offset="100%" stop-color="#4364F7" />
+    </linearGradient>
+    
+    <linearGradient id="bar3Grad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#0072FF" />
+      <stop offset="100%" stop-color="#00F0FF" />
+    </linearGradient>
+    
+    <!-- Gold gradient for the tech sparkle -->
+    <linearGradient id="goldGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#F2994A" />
+      <stop offset="100%" stop-color="#F2C94C" />
+    </linearGradient>
+    
+    <!-- Glowing beacon light radial gradient -->
+    <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F2C94C" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#F2C94C" stop-opacity="0" />
+    </radialGradient>
+    
+    <!-- Linear gradient for the sweeping light beam -->
+    <linearGradient id="beamGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F2C94C" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#F2C94C" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Glowing aura behind the AI sparkle beacon -->
+  <circle cx="460" cy="130" r="160" fill="url(#glowGrad)" />
+
+  <!-- Sweeping gold light beam (representing the beacon of marketing direction) -->
+  <polygon points="460,130 780,20 800,80 460,140" fill="url(#beamGrad)" />
+
+  <!-- The 3 Growth Chart Bars representing digital marketing scale -->
+  <!-- Bar 1 (Left) -->
+  <rect x="270" y="400" width="60" height="180" rx="12" fill="url(#bar1Grad)" />
+  
+  <!-- Bar 2 (Middle) -->
+  <rect x="350" y="290" width="60" height="290" rx="12" fill="url(#bar2Grad)" />
+  
+  <!-- Bar 3 (Right - The Tallest Peak) -->
+  <rect x="430" y="180" width="60" height="400" rx="12" fill="url(#bar3Grad)" />
+
+  <!-- The 4-Point AI Sparkle Star sitting at the peak of growth -->
+  <path d="M 460,90 Q 460,130 500,130 Q 460,130 460,170 Q 460,130 420,130 Q 460,130 460,90 Z" fill="url(#goldGrad)" />
+  
+  <!-- Central bright core of the light source -->
+  <circle cx="460" cy="130" r="5" fill="#FFFFFF" />
+
+  <!-- Clean, bold typography centered at the bottom -->
+  <text x="400" y="660" font-family="'Montserrat', 'Inter', 'Outfit', 'Segoe UI', sans-serif" font-weight="800" font-size="42" fill="#FFFFFF" text-anchor="middle" letter-spacing="4">GROWTH BEACON</text>
+  <text x="400" y="705" font-family="'Montserrat', 'Inter', 'Outfit', 'Segoe UI', sans-serif" font-weight="600" font-size="16" fill="#00F0FF" text-anchor="middle" letter-spacing="6">DIGITAL MARKETING AGENCY</text>
+</svg>

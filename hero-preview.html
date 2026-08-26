@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Visual Previews — Growth Beacon</title>
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #070b19;
+      --bg-card: rgba(13, 20, 41, 0.45);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --cyan-glow: #00f0ff;
+      --blue-accent: #0072ff;
+      --purple-glow: #a855f7;
+      --color-white: #ffffff;
+      --color-text-muted: #94a3b8;
+      --gold-accent: #f2c94c;
+      --gradient-blue: linear-gradient(135deg, #00f0ff 0%, #0072ff 100%);
+      --gradient-purple: linear-gradient(135deg, #a855f7 0%, #00f0ff 100%);
+      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Outfit', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--color-white);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Background Ambient Lights */
+    .glow-blob {
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, rgba(168, 85, 247, 0.03) 50%, transparent 100%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(40px);
+    }
+
+    .preview-container {
+      width: 100%;
+      max-width: 700px;
+      background: rgba(10, 15, 36, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 2.5rem;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: var(--glass-shadow);
+      z-index: 1;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.75rem;
+    }
+
+    /* Navigation/Toggle Menu */
+    .toggle-bar {
+      display: flex;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      padding: 6px;
+      border-radius: 16px;
+      margin-bottom: 2rem;
+      gap: 4px;
+      justify-content: center;
+    }
+
+    .toggle-btn {
+      background: transparent;
+      border: none;
+      color: var(--color-text-muted);
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.78rem;
+      transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .toggle-btn:hover {
+      color: var(--color-white);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .toggle-btn.active {
+      background: var(--gradient-blue);
+      color: var(--bg-dark);
+      box-shadow: 0 4px 12px rgba(0, 240, 255, 0.25);
+    }
+
+    /* Display Area */
+    .stage {
+      height: 380px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: rgba(4, 7, 18, 0.4);
+      border: 1px solid rgba(255,255,255,0.03);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .visual-wrapper {
+      display: none;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .visual-wrapper.active {
+      display: flex;
+    }
+
+    /* Common Narrative structures */
+    .narrative-stage {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .narrative-status-bar {
+      position: absolute;
+      top: 20px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 30px;
+      padding: 6px 16px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      letter-spacing: 0.02em;
+      z-index: 12;
+      box-shadow: var(--glass-shadow);
+      transition: all 0.3s ease;
+    }
+
+    /* Narrative Beacon (Lighthouse) */
+    .narrative-beacon {
+      position: absolute;
+      bottom: 20px;
+      left: 30px;
+      width: 60px;
+      height: 60px;
+      z-index: 10;
+    }
+
+    .beacon-tower {
+      position: absolute;
+      bottom: 0;
+      left: calc(50% - 10px);
+      width: 20px;
+      height: 40px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px 4px 0 0;
+    }
+
+    .beacon-light-source {
+      position: absolute;
+      top: -15px;
+      left: calc(50% - 15px);
+      width: 30px;
+      height: 30px;
+      background: radial-gradient(circle, #00f0ff 0%, rgba(0, 114, 255, 0.4) 60%, transparent 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.8);
+      animation: corePulse 1s ease-in-out infinite alternate;
+    }
+
+    .beacon-sweep-beam {
+      position: absolute;
+      top: 0;
+      left: 15px;
+      width: 480px;
+      height: 140px;
+      background: linear-gradient(90deg, rgba(0, 240, 255, 0.22) 0%, rgba(0, 114, 255, 0.02) 60%, transparent 100%);
+      transform-origin: left center;
+      transform: rotate(0deg);
+      animation: beamSweepLoop 10s infinite cubic-bezier(0.445, 0.05, 0.55, 0.95);
+      z-index: 5;
+      filter: blur(6px);
+      pointer-events: none;
+    }
+
+    .stagnant-tag {
+      position: absolute;
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      border-radius: 12px;
+      padding: 8px 14px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #f87171;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      transform: scale(0);
+      opacity: 0;
+    }
+
+    .growing-tag {
+      position: absolute;
+      background: var(--bg-card);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      border-radius: 12px;
+      padding: 8px 14px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--color-white);
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transform: scale(0);
+      opacity: 0;
+    }
+
+    @keyframes corePulse {
+      from { transform: scale(0.9); opacity: 0.8; }
+      to { transform: scale(1.1); opacity: 1; }
+    }
+
+    @keyframes beamSweepLoop {
+      0%, 25% { transform: rotate(-100deg); opacity: 0; }
+      30% { opacity: 1; }
+      50% { transform: rotate(20deg); opacity: 1; }
+      58%, 100% { transform: rotate(45deg); opacity: 0; }
+    }
+
+    /* --------------------------------------------------------------------------
+       B5: Optimized Chart Growth Guide
+       -------------------------------------------------------------------------- */
+    .chart-dashboard-wrapper {
+      width: 360px;
+      height: 220px;
+      position: absolute;
+      top: 22%;
+      left: 140px;
+      background: rgba(13, 20, 41, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: var(--glass-shadow), 0 0 10px rgba(255,255,255,0.01);
+      animation: floatPanel 6s ease-in-out infinite;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: border-color 1s ease, box-shadow 1s ease;
+    }
+
+    /* Shifting border colors/glows for the dashboard when active */
+    .chart-dashboard-wrapper.growing {
+      border-color: rgba(0, 240, 255, 0.25);
+      box-shadow: var(--glass-shadow), 0 0 20px rgba(0, 240, 255, 0.15);
+    }
+
+    @keyframes floatPanel {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(0.4deg); }
+    }
+
+    .chart-y-axis {
+      position: absolute;
+      left: 10px;
+      top: 15px;
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-end;
+      font-size: 0.6rem;
+      color: rgba(255, 255, 255, 0.2);
+      font-family: var(--font-heading);
+      font-weight: 600;
+      width: 25px;
+    }
+
+    .growing-chart-svg {
+      width: 300px;
+      height: 160px;
+      position: absolute;
+      top: 15px;
+      left: 45px;
+    }
+
+    /* Grid lines */
+    .chart-grid-line {
+      stroke: rgba(255, 255, 255, 0.035);
+      stroke-width: 1;
+    }
+
+    /* Optimized Flatline */
+    .stagnant-path {
+      stroke: #ef4444;
+      stroke-width: 2;
+      fill: none;
+      stroke-dasharray: 4;
+      animation: stagnantWave 2s linear infinite;
+      opacity: 0.55;
+    }
+
+    @keyframes stagnantWave {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: 8; }
+    }
+
+    /* Optimized Rising Path */
+    .rising-path-stroke {
+      stroke: url(#cyan-gradient-b5);
+      stroke-width: 4;
+      fill: none;
+      stroke-linecap: round;
+      stroke-dasharray: 600;
+      stroke-dashoffset: 600;
+      animation: drawLineLoop 10s infinite cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    /* Fading Area Fill under rising curve */
+    .rising-path-area {
+      fill: url(#cyan-area-gradient);
+      animation: fadeAreaLoop 10s infinite cubic-bezier(0.165, 0.84, 0.44, 1);
+      opacity: 0;
+    }
+
+    /* Glowing data node on end of curve */
+    .chart-glowing-dot {
+      fill: var(--cyan-glow);
+      filter: drop-shadow(0 0 8px var(--cyan-glow));
+      animation: fadeNodeLoop 10s infinite ease-in-out;
+      opacity: 0;
+    }
+
+    .chart-pulsing-ring {
+      fill: none;
+      stroke: var(--cyan-glow);
+      stroke-width: 1.5;
+      animation: fadeNodeLoop 10s infinite ease-in-out, nodePulse 1.5s infinite ease-out;
+      opacity: 0;
+      transform-origin: 280px 15px;
+    }
+
+    @keyframes nodePulse {
+      0% { transform: scale(0.8); opacity: 0.8; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    /* Dynamic elastic tag entries */
+    .stagnant-tag.active {
+      animation: stagnantTagEntry 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .growing-tag.active {
+      animation: growingTagEntry 10s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes stagnantTagEntry {
+      0% { transform: scale(0.7); opacity: 0; }
+      5%, 30% { transform: scale(1); opacity: 1; }
+      35%, 100% { transform: scale(0.7); opacity: 0; }
+    }
+
+    @keyframes growingTagEntry {
+      0%, 42% { transform: scale(0.7); opacity: 0; }
+      48%, 88% { transform: scale(1); opacity: 1; box-shadow: var(--glass-shadow), 0 0 15px rgba(0, 240, 255, 0.2); }
+      92%, 100% { transform: scale(0.7); opacity: 0; }
+    }
+
+    /* Common Animation loops */
+    @keyframes stagnantFadeLoop {
+      0%, 30% { opacity: 1; filter: blur(0px); }
+      38%, 92% { opacity: 0; filter: blur(8px); }
+      96%, 100% { opacity: 1; filter: blur(0px); }
+    }
+
+    @keyframes growingFadeLoop {
+      0%, 39% { opacity: 0; filter: blur(8px); }
+      45%, 88% { opacity: 1; filter: blur(0px); }
+      92%, 100% { opacity: 0; filter: blur(8px); }
+    }
+
+    @keyframes drawLineLoop {
+      0%, 42% { stroke-dashoffset: 600; }
+      60%, 88% { stroke-dashoffset: 0; }
+      92%, 100% { stroke-dashoffset: 600; }
+    }
+
+    @keyframes fadeAreaLoop {
+      0%, 45% { opacity: 0; }
+      60%, 88% { opacity: 0.15; }
+      92%, 100% { opacity: 0; }
+    }
+
+    @keyframes fadeNodeLoop {
+      0%, 56% { opacity: 0; }
+      60%, 88% { opacity: 1; }
+      92%, 100% { opacity: 0; }
+    }
+
+    .b5-stag-1 { top: 35px; right: 120px; }
+    .b5-stag-2 { bottom: 65px; left: 160px; }
+    .b5-grow-1 { top: 35px; right: 60px; border-color: rgba(37, 211, 102, 0.3); color: #25d366; }
+    .b5-grow-2 { bottom: 70px; left: 170px; }
+    .b5-grow-3 { bottom: 35px; right: 90px; }
+
+    /* --------------------------------------------------------------------------
+       B6: Funnel Expansion Narrative
+       -------------------------------------------------------------------------- */
+    .funnel-container {
+      width: 180px;
+      height: 180px;
+      position: absolute;
+      top: 25%;
+      right: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      animation: floatPanel 6s ease-in-out infinite;
+    }
+
+    .stagnant-funnel-shape {
+      width: 100px;
+      height: 140px;
+      background: linear-gradient(180deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.02) 100%);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      clip-path: polygon(0% 0%, 100% 0%, 65% 100%, 35% 100%);
+      position: relative;
+    }
+
+    .funnel-leak {
+      position: absolute;
+      bottom: -15px;
+      left: calc(50% - 2px);
+      width: 4px;
+      height: 20px;
+      background: #f87171;
+      animation: drip 1s infinite linear;
+    }
+
+    .growing-funnel-shape {
+      width: 160px;
+      height: 140px;
+      background: linear-gradient(180deg, rgba(0, 240, 255, 0.25) 0%, rgba(0, 114, 255, 0.05) 100%);
+      border: 2px solid var(--cyan-glow);
+      clip-path: polygon(0% 0%, 100% 0%, 60% 100%, 40% 100%);
+      box-shadow: 0 0 30px rgba(0,240,255,0.1);
+      animation: funnelExpand 2s infinite ease-in-out alternate;
+    }
+
+    .funnel-tag-1 { top: 60px; left: 100px; }
+    .funnel-tag-2 { bottom: 100px; right: 40px; }
+    .funnel-grow-1 { top: 50px; left: 60px; border-color: rgba(37, 211, 102, 0.3); color: #25d366; }
+    .funnel-grow-2 { bottom: 110px; right: 50px; }
+
+    @keyframes drip {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(30px); opacity: 0; }
+    }
+
+    @keyframes funnelExpand {
+      from { transform: scale(0.95); }
+      to { transform: scale(1.05); }
+    }
+
+    /* --------------------------------------------------------------------------
+       B7: Map Pin Supremacy Narrative
+       -------------------------------------------------------------------------- */
+    .map-grid-container {
+      width: 320px;
+      height: 180px;
+      border: 1px solid rgba(255,255,255,0.04);
+      background: radial-gradient(circle, rgba(255,255,255,0.01) 0%, transparent 100%);
+      border-radius: 12px;
+      position: absolute;
+      top: 25%;
+      right: 80px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 1px;
+      background-color: rgba(255,255,255,0.02);
+      padding: 8px;
+      animation: floatPanel 6s ease-in-out infinite;
+    }
+
+    .map-road {
+      border: 1px solid rgba(255,255,255,0.03);
+      position: relative;
+    }
+
+    .map-pin {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      transform-origin: 50% 100%;
+    }
+
+    .map-pin::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #070b19;
+      border-radius: 50%;
+      top: 4px;
+      left: 4px;
+    }
+
+    .stagnant-pin {
+      background: #ef4444;
+      top: 60%;
+      left: 65%;
+      opacity: 0.6;
+    }
+
+    .competitor-pin {
+      background: #475569;
+      top: 20%;
+      left: 30%;
+    }
+
+    .growing-pin {
+      background: var(--cyan-glow);
+      top: 20%;
+      left: 30%;
+      box-shadow: 0 0 20px var(--cyan-glow);
+      animation: pinHop 1.5s infinite ease-in-out alternate;
+      z-index: 10;
+    }
+
+    @keyframes pinHop {
+      0% { transform: rotate(-45deg) translateY(0); }
+      100% { transform: rotate(-45deg) translateY(-8px); }
+    }
+
+    /* --------------------------------------------------------------------------
+       OPTION C: Local Case Study Stack
+       -------------------------------------------------------------------------- */
+    .stack-container {
+      position: relative;
+      width: 360px;
+      height: 280px;
+    }
+
+    .stack-card {
+      position: absolute;
+      width: 320px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 1.5rem;
+      text-align: left;
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .card-theni {
+      top: 10px;
+      left: 10px;
+      z-index: 3;
+      border-color: rgba(0, 240, 255, 0.2);
+      animation: cycleStackTheni 8s infinite ease-in-out;
+    }
+
+    .card-madurai {
+      bottom: 10px;
+      right: 10px;
+      z-index: 2;
+      border-color: rgba(242, 201, 76, 0.15);
+      animation: cycleStackMadurai 8s infinite ease-in-out;
+    }
+
+    .card-location {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--cyan-glow);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-location.gold {
+      color: var(--gold-accent);
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.15rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 12px;
+    }
+
+    .metric-item span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      margin-bottom: 2px;
+    }
+
+    .metric-item strong {
+      font-size: 1.25rem;
+      color: var(--color-white);
+      font-family: var(--font-heading);
+    }
+
+    .metric-item strong.growth {
+      color: #25d366;
+    }
+
+    @keyframes cycleStackTheni {
+      0%, 45% {
+        transform: translate(0, 0) scale(1);
+        z-index: 3;
+        opacity: 1;
+        border-color: rgba(0, 240, 255, 0.25);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 240, 255, 0.1);
+      }
+      50%, 95% {
+        transform: translate(25px, 30px) scale(0.92);
+        z-index: 1;
+        opacity: 0.65;
+        border-color: var(--border-color);
+        box-shadow: var(--glass-shadow);
+      }
+      100% {
+        transform: translate(0, 0) scale(1);
+        z-index: 3;
+      }
+    }
+
+    @keyframes cycleStackMadurai {
+      0%, 45% {
+        transform: translate(0, 0) scale(0.92);
+        z-index: 1;
+        opacity: 0.65;
+        border-color: var(--border-color);
+        box-shadow: var(--glass-shadow);
+      }
+      50%, 95% {
+        transform: translate(-25px, -30px) scale(1);
+        z-index: 3;
+        opacity: 1;
+        border-color: rgba(242, 201, 76, 0.25);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(242, 201, 76, 0.1);
+      }
+      100% {
+        transform: translate(0, 0) scale(0.92);
+        z-index: 1;
+      }
+    }
+
+    .footer-actions {
+      margin-top: 2.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .back-btn {
+      color: var(--cyan-glow);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: 1px dashed rgba(0,240,255,0.3);
+      padding: 8px 18px;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: rgba(0, 240, 255, 0.05);
+      border-color: var(--cyan-glow);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-blob"></div>
+
+  <div class="preview-container">
+    <h1>Hero Visual Previews</h1>
+    <p class="subtitle">Select a layout below to preview the HTML/CSS rendering of Option B variations and Option C live.</p>
+    
+    <div class="toggle-bar">
+      <button class="toggle-btn" onclick="switchTab('option-b1')">Radar</button>
+      <button class="toggle-btn" onclick="switchTab('option-b4')">ROI Slider</button>
+      <button class="toggle-btn active" onclick="switchTab('option-b5')">🏆 B5: Chart Guide</button>
+      <button class="toggle-btn" onclick="switchTab('option-b6')">B6: Funnel Guide</button>
+      <button class="toggle-btn" onclick="switchTab('option-b7')">B7: Map Pin Guide</button>
+      <button class="toggle-btn" onclick="switchTab('option-c')">Option C: Case Stack</button>
+    </div>
+
+    <div class="stage">
+      <!-- Option B1: Service Radar -->
+      <div class="visual-wrapper" id="option-b1">
+        <div class="beacon-core">
+          <div class="beacon-light-beam"></div>
+          <div class="beacon-light-beam-opp"></div>
+        </div>
+        
+        <!-- Radar Rings -->
+        <div class="pulse-ring ring-1"></div>
+        <div class="pulse-ring ring-2"></div>
+        <div class="pulse-ring ring-3"></div>
+
+        <!-- Orbiting Service Tags -->
+        <div class="orbit-container orbit-inner-1">
+          <span class="orbit-text">SEO</span>
+        </div>
+        <div class="orbit-container orbit-inner-2">
+          <span class="orbit-text">SMM</span>
+        </div>
+        
+        <div class="orbit-container orbit-middle-1">
+          <span class="orbit-text">PPC ADS</span>
+        </div>
+        <div class="orbit-container orbit-middle-2">
+          <span class="orbit-text">LEADS</span>
+        </div>
+        
+        <div class="orbit-container orbit-outer-1">
+          <span class="orbit-text">ROI 5.2x</span>
+        </div>
+        <div class="orbit-container orbit-outer-2">
+          <span class="orbit-text">GROWTH</span>
+        </div>
+      </div>
+
+      <!-- Option B4: ROI Simulator -->
+      <div class="visual-wrapper" id="option-b4">
+        <div class="slider-card" style="animation: floatPanel 6s ease-in-out infinite;">
+          <div class="slider-header">
+            <span>ROI Growth Simulator</span>
+            <span class="badge">Drag Me</span>
+          </div>
+          <div class="slider-metric-main">
+            <span class="label">Monthly Budget</span>
+            <strong id="slider-budget-text">₹25,000</strong>
+          </div>
+          
+          <input type="range" min="10000" max="200000" step="5000" value="25000" class="growth-slider" id="budget-range-input">
+          
+          <div class="slider-results-grid">
+            <div class="result-item">
+              <span>Est. Leads / mo</span>
+              <strong id="result-leads">125</strong>
+            </div>
+            <div class="result-item">
+              <span>Projected Revenue</span>
+              <strong id="result-revenue" style="color: #25d366;">₹1,25,000</strong>
+            </div>
+          </div>
+          <div class="slider-footer">Projected ROAS: <strong>5.0x Return</strong></div>
+        </div>
+      </div>
+
+      <!-- Option B5: Optimized Chart Growth Guide -->
+      <div class="visual-wrapper active" id="option-b5">
+        <div class="narrative-stage">
+          <div class="narrative-status-bar text-b5">Stagnant Business... ⚠️</div>
+          
+          <!-- Narrative Beacon Tower -->
+          <div class="narrative-beacon">
+            <div class="beacon-light-source"></div>
+            <div class="beacon-tower"></div>
+            <div class="beacon-sweep-beam"></div>
+          </div>
+
+          <!-- High Fidelity Dashboard Chart Wrapper -->
+          <div class="chart-dashboard-wrapper" id="dashboard-wrapper">
+            <div class="chart-y-axis">
+              <span>150k</span>
+              <span>80k</span>
+              <span>10k</span>
+              <span>0</span>
+            </div>
+
+            <!-- Stagnant State Chart -->
+            <div class="narrative-stagnant-state narrative-stagnant-b5">
+              <svg viewBox="0 0 300 160" class="growing-chart-svg">
+                <!-- Y-Grid lines -->
+                <line x1="0" y1="15" x2="300" y2="15" class="chart-grid-line" />
+                <line x1="0" y1="75" x2="300" y2="75" class="chart-grid-line" />
+                <line x1="0" y1="145" x2="300" y2="145" class="chart-grid-line" />
+                <!-- Slightly wavy flatline -->
+                <path d="M0,140 Q25,138 50,140 T100,141 T150,140 T200,138 T250,140 T300,141" class="stagnant-path" />
+              </svg>
+              <div class="stagnant-tag b5-stag-1 active">Leads: Flatline ⚠️</div>
+              <div class="stagnant-tag b5-stag-2 active">Sales: Stagnating 📉</div>
+            </div>
+
+            <!-- Growing State Chart (Optimized with Area Fill & Node) -->
+            <div class="narrative-growing-state narrative-growing-b5">
+              <svg viewBox="0 0 300 160" class="growing-chart-svg">
+                <!-- Grid Lines -->
+                <line x1="0" y1="15" x2="300" y2="15" class="chart-grid-line" />
+                <line x1="0" y1="75" x2="300" y2="75" class="chart-grid-line" />
+                <line x1="0" y1="145" x2="300" y2="145" class="chart-grid-line" />
+                
+                <!-- Fading Area Fill under path -->
+                <path d="M10,140 C80,140 130,120 170,75 C200,45 240,25 280,15 L280,150 L10,150 Z" class="rising-path-area" />
+                
+                <!-- Rising Stroke Path -->
+                <path d="M10,140 C80,140 130,120 170,75 C200,45 240,25 280,15" class="rising-path-stroke" />
+                
+                <!-- Glowing data node at peak -->
+                <circle cx="280" cy="15" r="10" class="chart-pulsing-ring" />
+                <circle cx="280" cy="15" r="5" class="chart-glowing-dot" />
+
+                <defs>
+                  <linearGradient id="cyan-gradient-b5" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#0072ff" />
+                    <stop offset="100%" stop-color="#00f0ff" />
+                  </linearGradient>
+                  <linearGradient id="cyan-area-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.3" />
+                    <stop offset="100%" stop-color="#00f0ff" stop-opacity="0.0" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="growing-tag b5-grow-1 active">Traffic Spike: +180% 🚀</div>
+              <div class="growing-tag b5-grow-2 active">Leads: Scaling Up! 🔥</div>
+              <div class="growing-tag b5-grow-3 active">ROI: 5.2x Return 💸</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Option B6: Funnel Optimizer Guide -->
+      <div class="visual-wrapper" id="option-b6">
+        <div class="narrative-stage">
+          <div class="narrative-status-bar text-b6">Unoptimized Sales Funnel... ⚠️</div>
+          <div class="narrative-beacon">
+            <div class="beacon-light-source"></div>
+            <div class="beacon-tower"></div>
+            <div class="beacon-sweep-beam"></div>
+          </div>
+          <div class="narrative-stagnant-state" style="animation: stagnantFadeLoop 10s infinite;">
+            <div class="funnel-container">
+              <div class="stagnant-funnel-shape">
+                <div class="funnel-leak"></div>
+              </div>
+            </div>
+            <div class="stagnant-tag funnel-tag-1 active">Leads Leaking Out ⚠️</div>
+            <div class="stagnant-tag funnel-tag-2 active">High Bounce Rate: 84% 📉</div>
+          </div>
+          <div class="narrative-growing-state" style="animation: growingFadeLoop 10s infinite;">
+            <div class="funnel-container" style="border-color: rgba(0, 240, 255, 0.25); box-shadow: 0 0 20px rgba(0,240,255,0.15);">
+              <div class="growing-funnel-shape"></div>
+            </div>
+            <div class="growing-tag funnel-grow-1 active">Funnel Sealed & Optimised! 🔐</div>
+            <div class="growing-tag funnel-grow-2 active">Conversion CTR: +210% 🚀</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Option B7: Local Map Pin Guide -->
+      <div class="visual-wrapper" id="option-b7">
+        <div class="narrative-stage">
+          <div class="narrative-status-bar text-b7">Buried in Local Searches... ⚠️</div>
+          <div class="narrative-beacon">
+            <div class="beacon-light-source"></div>
+            <div class="beacon-tower"></div>
+            <div class="beacon-sweep-beam"></div>
+          </div>
+          <div class="narrative-stagnant-state" style="animation: stagnantFadeLoop 10s infinite;">
+            <div class="map-grid-container">
+              <div class="map-road"></div><div class="map-road"></div><div class="map-road"><div class="map-pin competitor-pin"></div></div><div class="map-road"></div>
+              <div class="map-road"></div><div class="map-road"></div><div class="map-road"></div><div class="map-road"></div>
+              <div class="map-road"></div><div class="map-road"></div><div class="map-road"></div><div class="map-road"><div class="map-pin stagnant-pin"></div></div>
+              <div class="map-road"></div><div class="map-road"></div><div class="map-road"></div><div class="map-road"></div>
+            </div>
+            <div class="stagnant-tag active" style="top: 80px; right: 180px;">Not in Local Pack ⚠️</div>
+            <div class="stagnant-tag active" style="bottom: 70px; left: 160px;">Zero Call Clicks 📞</div>
+          </div>
+          <div class="narrative-growing-state" style="animation: growingFadeLoop 10s infinite;">
+            <div class="map-grid-container" style="border-color: rgba(0, 240, 255, 0.25); box-shadow: 0 0 20px rgba(0,240,255,0.15);">
+              <div class="map-road"></div><div class="map-road"></div><div class="map-road"><div class="map-pin competitor-pin"></div></div><div class="map-road"></div>
+              <div class="map-road"></div><div class="map-road"><div class="map-pin growing-pin"></div></div><div class="map-road"></div><div class="map-road"></div>
+              <div class="map-road"></div><div class="map-road"></div><div class="map-road"></div><div class="map-road"></div>
+              <div class="map-road"></div><div class="map-road"></div><div class="map-road"></div><div class="map-road"></div>
+            </div>
+            <div class="growing-tag active" style="top: 50px; right: 240px; border-color: rgba(37, 211, 102, 0.3); color: #25d366;">Google Maps: #1 Rank 🗺️</div>
+            <div class="growing-tag active" style="bottom: 90px; right: 120px;">Phone Calls: +142% 📞</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Option C: Case Stack -->
+      <div class="visual-wrapper" id="option-c">
+        <div class="stack-container">
+          <!-- Card 1 -->
+          <div class="stack-card card-theni">
+            <div class="card-location">📍 Theni, TN</div>
+            <div class="card-title">Apex Silk Showroom</div>
+            <div class="card-metrics-grid">
+              <div class="metric-item">
+                <span>Google Maps</span>
+                <strong>Rank #1</strong>
+              </div>
+              <div class="metric-item">
+                <span>Foot Traffic</span>
+                <strong class="growth">+142%</strong>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Card 2 -->
+          <div class="stack-card card-madurai">
+            <div class="card-location gold">📍 Madurai, TN</div>
+            <div class="card-title">B2B Coir Exporters</div>
+            <div class="card-metrics-grid">
+              <div class="metric-item">
+                <span>Organic Leads</span>
+                <strong>48/mo</strong>
+              </div>
+              <div class="metric-item">
+                <span>SEO Traffic</span>
+                <strong class="growth">+180%</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-actions">
+      <a href="index.html" class="back-btn">← Back to Homepage</a>
+    </div>
+  </div>
+
+  <script>
+    function switchTab(tabId) {
+      // Toggle active classes on buttons
+      const buttons = document.querySelectorAll('.toggle-btn');
+      buttons.forEach(btn => {
+        if(btn.getAttribute('onclick').includes(tabId)) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // Toggle active classes on visual blocks
+      const wrappers = document.querySelectorAll('.visual-wrapper');
+      wrappers.forEach(wrap => {
+        if(wrap.id === tabId) {
+          wrap.classList.add('active');
+        } else {
+          wrap.classList.remove('active');
+        }
+      });
+    }
+
+    // Interactive ROI Calculator Logic
+    const slider = document.getElementById('budget-range-input');
+    const budgetText = document.getElementById('slider-budget-text');
+    const leadsText = document.getElementById('result-leads');
+    const revenueText = document.getElementById('result-revenue');
+
+    if (slider) {
+      slider.addEventListener('input', function() {
+        const value = parseInt(this.value, 10);
+        budgetText.textContent = '₹' + value.toLocaleString('en-IN');
+        const leads = Math.round(value / 200);
+        leadsText.textContent = leads;
+        const revenue = value * 5;
+        revenueText.textContent = '₹' + revenue.toLocaleString('en-IN');
+      });
+    }
+
+    // Narrative Timelines text updates (Synchronized with loops)
+    const dashboardEl = document.getElementById('dashboard-wrapper');
+    setInterval(() => {
+      const now = Date.now() % 10000;
+      
+      // Update B5 Chart dashboard classes
+      if (dashboardEl) {
+        if (now >= 4500 && now < 8800) {
+          dashboardEl.classList.add('growing');
+        } else {
+          dashboardEl.classList.remove('growing');
+        }
+      }
+
+      // Update B5 Chart guide status
+      const tB5 = document.querySelector('.text-b5');
+      if(tB5) {
+        if (now < 3000) tB5.textContent = "Stagnant Local Business... ⚠️";
+        else if (now >= 3000 && now < 4500) tB5.textContent = "Growth Beacon Guide Activation! 📡";
+        else if (now >= 4500 && now < 8800) tB5.textContent = "Business Scaling & Generating High ROI! 🚀";
+        else tB5.textContent = "Restarting Loop...";
+      }
+
+      // Update B6 Funnel guide status
+      const tB6 = document.querySelector('.text-b6');
+      if(tB6) {
+        if (now < 3000) tB6.textContent = "Leaky, Unoptimized Sales Funnel... ⚠️";
+        else if (now >= 3000 && now < 4500) tB6.textContent = "CRO Audit & Beacon Mapping! 📡";
+        else if (now >= 4500 && now < 8800) tB6.textContent = "Funnel Sealed: Conversion CTR +210%! 🚀";
+        else tB6.textContent = "Restarting Loop...";
+      }
+
+      // Update B7 Map Pin guide status
+      const tB7 = document.querySelector('.text-b7');
+      if(tB7) {
+        if (now < 3000) tB7.textContent = "Buried in Local Maps Pack... ⚠️";
+        else if (now >= 3000 && now < 4500) tB7.textContent = "Local SEO & GMB Optimization! 📡";
+        else if (now >= 4500 && now < 8800) tB7.textContent = "Rank #1: Store Foot-Traffic Spiking! 🗺️";
+        else tB7.textContent = "Restarting Loop...";
+      }
+    }, 250);
+  </script>
+
+  <!-- App-Style Mobile Bottom Navigation Tab Bar -->
+  <nav class="mobile-bottom-nav" aria-label="Mobile Bottom Navigation">
+    <a href="/#home" class="mobile-nav-item" data-nav-section="home">
+      <svg class="mobile-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+      </svg>
+      <span>Home</span>
+    </a>
+    <a href="/about/" class="mobile-nav-item" data-nav-section="about">
+      <svg class="mobile-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <span>About</span>
+    </a>
+    <a href="/services/" class="mobile-nav-item" data-nav-section="services">
+      <svg class="mobile-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+      </svg>
+      <span>Services</span>
+    </a>
+    <a href="/locations/" class="mobile-nav-item" data-nav-section="locations">
+      <svg class="mobile-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+      </svg>
+      <span>Locations</span>
+    </a>
+    <a href="/blog/" class="mobile-nav-item" data-nav-section="blog">
+      <svg class="mobile-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+      </svg>
+      <span>Blog</span>
+    </a>
+    <a href="/contact/" class="mobile-nav-item" data-nav-section="contact">
+      <svg class="mobile-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+      </svg>
+      <span>Contact</span>
+    </a>
+  </nav>
+
+</body>
+</html>

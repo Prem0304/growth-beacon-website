@@ -1,0 +1,10 @@
+# Growth Beacon — Git Ignore Rules
+.system_generated/
+scratch/
+brain/
+*.db
+*.sqlite
+*.log
+.DS_Store
+Thumbs.db
+node_modules/
