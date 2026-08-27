@@ -1,0 +1,23 @@
+# RENDER BLUEPRINT SPECIFICATION FOR GROWTHBEACON CRM
+services:
+  - type: web
+    name: growthbeacon-crm-web
+    env: python
+    buildCommand: "pip install -r requirements.txt && python migrations/migrate_postgres.py"
+    startCommand: "gunicorn backend.app:app --bind 0.0.0.0:$PORT"
+    healthCheckPath: /api/v1/auth/me
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: ALLOWED_ORIGINS
+        value: "https://www.growthbeacon.co.in,https://app.growthbeacon.co.in"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: growthbeacon-crm-db
+          property: connectionString
+
+databases:
+  - name: growthbeacon-crm-db
+    databaseName: growth_beacon_crm
+    user: growthbeacon_user
+    plan: free

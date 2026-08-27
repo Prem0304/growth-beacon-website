@@ -54,6 +54,22 @@ class GrowthBeaconCRMApp(http.server.SimpleHTTPRequestHandler):
             return json.loads(raw)
         return {}
 
+    def get_idempotency_key(self):
+        return self.headers.get('X-Idempotency-Key', '').strip()
+
+    def check_idempotency(self, key: str):
+        if not key:
+            return None
+        cached = Database.execute_single("SELECT response_body FROM idempotency_keys WHERE key = ?", (key,))
+        if cached:
+            return json.loads(cached['response_body'])
+        return None
+
+    def save_idempotency(self, key: str, response_data: dict):
+        if key:
+            Database.execute_write("INSERT INTO idempotency_keys (key, request_hash, response_body) VALUES (?, 'hash', ?)",
+                                   (key, json.dumps(response_data)))
+
     # =========================================================================
     # HTTP GET HANDLER
     # =========================================================================
@@ -212,7 +228,7 @@ class GrowthBeaconCRMApp(http.server.SimpleHTTPRequestHandler):
         return super().do_GET()
 
     # =========================================================================
-    # HTTP POST HANDLER
+    # HTTP POST HANDLER WITH IDEMPOTENCY & GENERIC RESPONSES
     # =========================================================================
     def do_POST(self):
         parsed = urlparse(self.path)
@@ -223,15 +239,22 @@ class GrowthBeaconCRMApp(http.server.SimpleHTTPRequestHandler):
         except ValueError as ve:
             return self.send_error_json(str(ve), "PAYLOAD_TOO_LARGE", 413)
 
+        idempotency_key = self.get_idempotency_key()
+        cached_res = self.check_idempotency(idempotency_key)
+        if cached_res:
+            return self.send_json(cached_res)
+
         # Public Website Enquiry Webhook
         if path == '/api/v1/leads/public-enquiry':
             ip_addr = self.get_client_ip()
             if not Middleware.check_rate_limit(ip_addr, max_requests=5, window_seconds=900):
-                return self.send_error_json("Rate limit exceeded. Please wait 15 minutes before submitting again.", "TOO_MANY_REQUESTS", 429)
+                return self.send_error_json("Rate limit exceeded. Please try again later.", "TOO_MANY_REQUESTS", 429)
 
             # Spam Honeypot check
             if body.get('website_hp_check'):
-                return self.send_json({"success": True, "message": "Enquiry received."})
+                res = {"success": True, "message": "Thank you for contacting GrowthBeacon! Your enquiry has been received."}
+                self.save_idempotency(idempotency_key, res)
+                return self.send_json(res)
 
             name = body.get('name', '').strip()
             email = body.get('email', '').strip().lower()
@@ -241,16 +264,15 @@ class GrowthBeaconCRMApp(http.server.SimpleHTTPRequestHandler):
             message = body.get('message', '').strip()
 
             if not name or not (email or phone):
-                return self.send_error_json("Name and contact email or phone are required", "VALIDATION_ERROR", 400)
+                return self.send_error_json("Name and contact information are required", "VALIDATION_ERROR", 400)
 
-            # Duplicate Check
+            # Duplicate Check (Generic response to prevent user enumeration)
             dup = lead_repo.find_duplicate(email, phone)
+            generic_response = {"success": True, "message": "Thank you for contacting GrowthBeacon! Your enquiry has been received."}
+            
             if dup:
-                return self.send_json({
-                    "success": True,
-                    "message": "Thank you! Your enquiry has been received and updated in our system.",
-                    "lead_id": dup['id']
-                })
+                self.save_idempotency(idempotency_key, generic_response)
+                return self.send_json(generic_response)
 
             # Server-Side Lead Scoring
             score = 50
@@ -268,7 +290,8 @@ class GrowthBeaconCRMApp(http.server.SimpleHTTPRequestHandler):
             Database.execute_write("INSERT INTO audit_logs (action, entity_type, entity_id, details) VALUES ('PUBLIC_LEAD_ENQUIRY', 'Lead', ?, ?)",
                                    (str(lead_id), f"Public web lead: {name} ({email})"))
 
-            return self.send_json({"success": True, "message": "Thank you for contacting GrowthBeacon!", "lead_id": lead_id})
+            self.save_idempotency(idempotency_key, generic_response)
+            return self.send_json(generic_response)
 
         # Auth Login
         if path == '/api/v1/auth/login':
@@ -316,13 +339,16 @@ class GrowthBeaconCRMApp(http.server.SimpleHTTPRequestHandler):
         # Create Lead
         if path == '/api/v1/leads':
             lid = lead_repo.create_lead(body)
-            return self.send_json({"success": True, "lead_id": lid})
+            res = {"success": True, "lead_id": lid}
+            self.save_idempotency(idempotency_key, res)
+            return self.send_json(res)
 
         # Convert Lead / Deal to Client Account (Transactional Workflow)
         if path.endswith('/convert-to-client') or path.endswith('/convert'):
-            deal_id = int(path.split('/')[-2]) if 'deals' in path else int(path.split('/')[-2])
+            deal_id = int(path.split('/')[-2])
             company_name = body.get('company_name', 'Converted Client Account')
             res = ConversionService.convert_deal_to_client(deal_id, company_name, session['user_id'])
+            self.save_idempotency(idempotency_key, res)
             return self.send_json(res)
 
         # Create Invoice (With Decimal GST Toggle)
@@ -340,9 +366,11 @@ class GrowthBeaconCRMApp(http.server.SimpleHTTPRequestHandler):
             """
             inv_id = Database.execute_write(query, (inv_num, client_id, calc['subtotal'], calc['include_gst'], calc['cgst_rate'], calc['sgst_rate'], calc['cgst_amount'], calc['sgst_amount'], calc['total_amount'], calc['total_amount']))
 
-            return self.send_json({"success": True, "invoice_id": inv_id, "invoice_number": inv_num, "total": calc['total_amount']})
+            res = {"success": True, "invoice_id": inv_id, "invoice_number": inv_num, "total": calc['total_amount']}
+            self.save_idempotency(idempotency_key, res)
+            return self.send_json(res)
 
-        # Record Payment
+        # Record Payment (Idempotency Protected)
         if path == '/api/v1/payments':
             inv_id = int(body.get('invoice_id'))
             amount = float(body.get('amount', 0))
@@ -358,7 +386,9 @@ class GrowthBeaconCRMApp(http.server.SimpleHTTPRequestHandler):
             Database.execute_write("UPDATE invoices SET paid_amount = ?, balance_amount = ?, status = ? WHERE id = ?",
                                    (calc['paid_amount'], calc['balance_amount'], calc['status'], inv_id))
 
-            return self.send_json({"success": True, "paid_amount": calc['paid_amount'], "balance": calc['balance_amount'], "status": calc['status']})
+            res = {"success": True, "paid_amount": calc['paid_amount'], "balance": calc['balance_amount'], "status": calc['status']}
+            self.save_idempotency(idempotency_key, res)
+            return self.send_json(res)
 
         return self.send_error_json("Endpoint not found", "NOT_FOUND", 404)
 

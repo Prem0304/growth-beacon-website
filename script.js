@@ -150,10 +150,18 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(async (response) => {
         let json = await response.json();
         if (response.status === 200) {
-          // POST to GrowthBeacon CRM Public Enquiry Webhook API
-          fetch("/api/v1/leads/public-enquiry", {
+          // POST to GrowthBeacon CRM Public Enquiry Webhook API (Render Production Endpoint)
+          const apiEndpoint = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
+            ? "/api/v1/leads/public-enquiry" 
+            : "https://app.growthbeacon.co.in/api/v1/leads/public-enquiry";
+          const idempotencyKey = 'web_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
+
+          fetch(apiEndpoint, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+              "Content-Type": "application/json",
+              "X-Idempotency-Key": idempotencyKey
+            },
             body: JSON.stringify({
               name: formData.get("name"),
               email: formData.get("email"),
