@@ -8,7 +8,47 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css?v=39">
   <link rel="stylesheet" href="./crm.css?v=20">
+  <style>
+    :root {
+      --crm-bg-dark: #070b19;
+      --crm-bg-card: rgba(13, 20, 41, 0.75);
+      --crm-bg-sidebar: #090e21;
+      --crm-bg-topbar: rgba(9, 14, 33, 0.9);
+      --crm-border: rgba(255, 255, 255, 0.12);
+      --cyan-glow: #00f0ff;
+      --blue-accent: #0072ff;
+      --green-success: #25d366;
+    }
+    body { background-color: #070b19 !important; color: #ffffff !important; font-family: 'Outfit', 'Inter', sans-serif !important; margin: 0; padding: 0; }
+    .crm-container { display: flex; width: 100vw; height: 100vh; overflow: hidden; }
+    .crm-sidebar { width: 240px; background: #090e21; border-right: 1px solid var(--crm-border); display: flex; flex-direction: column; flex-shrink: 0; }
+    .crm-sidebar-header { padding: 1.25rem; display: flex; align-items: center; gap: 0.75rem; border-bottom: 1px solid var(--crm-border); }
+    .crm-sidebar-logo { width: 34px; height: 34px; border-radius: 6px; }
+    .crm-sidebar-title { font-size: 1.1rem; font-weight: 800; letter-spacing: 0.5px; }
+    .crm-sidebar-nav { flex: 1; padding: 1rem 0.75rem; overflow-y: auto; }
+    .nav-group-title { font-size: 0.7rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin: 1.25rem 0.75rem 0.5rem 0.75rem; }
+    .nav-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0.85rem; color: #94a3b8; text-decoration: none; font-size: 0.9rem; font-weight: 500; border-radius: 6px; cursor: pointer; }
+    .nav-item.active { color: #ffffff; background: rgba(0, 240, 255, 0.1); border-left: 3px solid #00f0ff; }
+    .crm-main { flex: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+    .crm-topbar { height: 64px; background: #090e21; border-bottom: 1px solid var(--crm-border); display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; }
+    .crm-content { flex: 1; padding: 1.5rem; overflow-y: auto; }
+    .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem; }
+    .metric-card { background: rgba(13, 20, 41, 0.75); border: 1px solid var(--crm-border); border-radius: 10px; padding: 1.25rem; position: relative; overflow: hidden; }
+    .metric-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #0072ff; }
+    .metric-card.glow-cyan::before { background: #00f0ff; }
+    .metric-card.glow-green::before { background: #25d366; }
+    .metric-label { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; }
+    .metric-value { font-size: 1.8rem; font-weight: 800; margin: 0.4rem 0; }
+    .table-card { background: rgba(13, 20, 41, 0.75); border: 1px solid var(--crm-border); border-radius: 10px; overflow: hidden; margin-bottom: 1.5rem; }
+    .crm-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem; }
+    .crm-table th { background: #0f172a; color: #94a3b8; padding: 0.85rem 1rem; font-weight: 600; border-bottom: 1px solid var(--crm-border); }
+    .crm-table td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--crm-border); }
+    .badge-status { padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; display: inline-block; }
+    .btn-crm { padding: 0.5rem 1.25rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border: none; }
+    .btn-crm-secondary { background: rgba(255, 255, 255, 0.08); color: #fff; border: 1px solid var(--crm-border); }
+  </style>
 </head>
 <body style="background:#070b19;">
 
