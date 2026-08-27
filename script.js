@@ -232,8 +232,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // Hidden CRM Admin Portal Entry Triggers
-  // ==========================================================================
   // 1. Keyboard Shortcut Trigger (Alt + Shift + A)
   window.addEventListener('keydown', (e) => {
     if (e.altKey && e.shiftKey && e.key.toLowerCase() === 'a') {
