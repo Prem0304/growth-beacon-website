@@ -150,23 +150,19 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(async (response) => {
         let json = await response.json();
         if (response.status === 200) {
-          // Save Lead Locally for CRM
-          const localLead = {
-            id: Date.now(),
-            name: formData.get("name"),
-            email: formData.get("email"),
-            phone: formData.get("phone"),
-            company: formData.get("company"),
-            service: formData.getAll("services").join(", ") || "N/A",
-            message: formData.get("message"),
-            status: "New",
-            notes: "",
-            date: new Date().toLocaleDateString()
-          };
-          
-          let localLeads = JSON.parse(localStorage.getItem("gb_crm_leads")) || [];
-          localLeads.unshift(localLead);
-          localStorage.setItem("gb_crm_leads", JSON.stringify(localLeads));
+          // POST to GrowthBeacon CRM Public Enquiry Webhook API
+          fetch("/api/v1/leads/public-enquiry", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: formData.get("name"),
+              email: formData.get("email"),
+              phone: formData.get("phone"),
+              company: formData.get("company"),
+              service: formData.getAll("services").join(", ") || "Digital Marketing",
+              message: formData.get("message") || "Submitted via website contact form"
+            })
+          }).catch(err => console.log("CRM Enquiry Sync Note:", err));
 
           // Track GA4 conversion event
           if (typeof gtag === 'function') {
