@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>Growth Beacon</ShortName>
+  <Description>Search Growth Beacon Digital Marketing &amp; SEO Insights</Description>
+  <Tags>digital marketing seo google ads web development theni</Tags>
+  <Contact>growth@growthbeacon.co.in</Contact>
+  <Url type="text/html" template="https://growthbeacon.co.in/blog/?q={searchTerms}"/>
+  <Image height="16" width="16" type="image/png">https://growthbeacon.co.in/assets/favicon.png</Image>
+  <Developer>Growth Beacon Engineering</Developer>
+  <Attribution>Growth Beacon Digital Marketing Agency</Attribution>
+  <SyndicationRight>open</SyndicationRight>
+  <AdultContent>false</AdultContent>
+  <Language>en-us</Language>
+  <OutputEncoding>UTF-8</OutputEncoding>
+  <InputEncoding>UTF-8</InputEncoding>
+</OpenSearchDescription>
