@@ -595,6 +595,14 @@ document.addEventListener('DOMContentLoaded', () => {
         captionEl.style.color = "var(--cyan-glow)";
         captionEl.style.borderColor = "rgba(0, 240, 255, 0.2)";
         captionEl.style.background = "rgba(0, 240, 255, 0.05)";
+      } else {
+        captionEl.textContent = "Stagnant Local Business... ⚠️";
+        captionEl.style.color = "#f87171";
+        captionEl.style.borderColor = "rgba(239, 68, 68, 0.2)";
+        captionEl.style.background = "rgba(239, 68, 68, 0.05)";
+      }
+    }, 200);
+  }
   // ==========================================================================
   // Conversion Click Event Tracking (WhatsApp, Phone, Email)
   // ==========================================================================
