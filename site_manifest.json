@@ -1,0 +1,51 @@
+{
+  "name": "Growth Beacon",
+  "short_name": "Growth Beacon",
+  "start_url": "https://growthbeacon.co.in/",
+  "display": "standalone",
+  "background_color": "#070b19",
+  "theme_color": "#00f0ff",
+  "description": "Growth Beacon is a premier performance digital marketing agency in Theni, Tamil Nadu specializing in SEO, Google Ads, Meta Ads, web development, and branding.",
+  "icons": [
+    {
+      "src": "https://growthbeacon.co.in/assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "https://growthbeacon.co.in/assets/favicon.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Growth Beacon",
+    "url": "https://growthbeacon.co.in/",
+    "logo": "https://growthbeacon.co.in/assets/growth_beacon_logo.jpg",
+    "sameAs": [
+      "https://wa.me/918190801030",
+      "https://www.instagram.com/growthbeacon.co/?hl=en",
+      "https://github.com/Prem0304/growth-beacon-website",
+      "https://www.linkedin.com/company/growthbeacon",
+      "https://growthbeacon.co.in/"
+    ]
+  },
+  "service_hubs": [
+    "https://growthbeacon.co.in/services/seo/",
+    "https://growthbeacon.co.in/services/google-ads/",
+    "https://growthbeacon.co.in/services/meta-ads/",
+    "https://growthbeacon.co.in/services/website-development/",
+    "https://growthbeacon.co.in/services/social-media-marketing/",
+    "https://growthbeacon.co.in/services/branding/",
+    "https://growthbeacon.co.in/services/whatsapp-marketing/",
+    "https://growthbeacon.co.in/services/google-business-profile-optimization/"
+  ],
+  "location_hubs": [
+    "https://growthbeacon.co.in/locations/theni/",
+    "https://growthbeacon.co.in/locations/madurai/",
+    "https://growthbeacon.co.in/locations/dindigul/",
+    "https://growthbeacon.co.in/locations/coimbatore/",
+    "https://growthbeacon.co.in/locations/south-tamil-nadu/"
+  ]
+}

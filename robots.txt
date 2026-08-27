@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://growthbeacon.co.in/sitemap_index.xml
 Sitemap: https://growthbeacon.co.in/sitemap.xml
 Sitemap: https://growthbeacon.co.in/feed.xml
