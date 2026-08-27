@@ -1,0 +1,32 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "Growth Beacon \u2014 Digital Marketing & SEO Insights",
+  "home_page_url": "https://growthbeacon.co.in/",
+  "feed_url": "https://growthbeacon.co.in/jsonfeed.json",
+  "description": "Performance marketing, SEO, Google Ads & web development insights from Growth Beacon agency in Theni, Tamil Nadu.",
+  "icon": "https://growthbeacon.co.in/assets/apple-touch-icon.png",
+  "favicon": "https://growthbeacon.co.in/assets/favicon.png",
+  "authors": [
+    {
+      "name": "Growth Beacon",
+      "url": "https://growthbeacon.co.in/",
+      "avatar": "https://growthbeacon.co.in/assets/growth_beacon_logo.jpg"
+    }
+  ],
+  "items": [
+    {
+      "id": "https://growthbeacon.co.in/blog/how-local-seo-helps-businesses-in-theni/",
+      "url": "https://growthbeacon.co.in/blog/how-local-seo-helps-businesses-in-theni/",
+      "title": "How Local SEO Helps Businesses in Theni Drive Store Visits",
+      "summary": "Detailed guide on local SEO strategies for businesses in Theni. Learn how local search optimization drives store visits & phone inquiries.",
+      "date_published": "2026-08-25T10:00:00+05:30"
+    },
+    {
+      "id": "https://growthbeacon.co.in/blog/how-much-does-digital-marketing-cost-in-tamil-nadu/",
+      "url": "https://growthbeacon.co.in/blog/how-much-does-digital-marketing-cost-in-tamil-nadu/",
+      "title": "How Much Does Digital Marketing Cost in Tamil Nadu?",
+      "summary": "A complete 2026 pricing breakdown for SEO, Google Ads, Meta Ads, and web design packages across Theni, Madurai, Dindigul, and Coimbatore.",
+      "date_published": "2026-08-24T10:00:00+05:30"
+    }
+  ]
+}

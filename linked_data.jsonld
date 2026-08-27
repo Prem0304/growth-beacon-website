@@ -1,0 +1,48 @@
+{
+  "@context": {
+    "schema": "https://schema.org/",
+    "wikidata": "https://www.wikidata.org/wiki/",
+    "dbpedia": "https://dbpedia.org/resource/"
+  },
+  "@graph": [
+    {
+      "@type": "schema:Organization",
+      "@id": "https://growthbeacon.co.in/#organization",
+      "schema:name": "Growth Beacon",
+      "schema:legalName": "Growth Beacon Digital Marketing Agency",
+      "schema:url": "https://growthbeacon.co.in/",
+      "schema:logo": "https://growthbeacon.co.in/assets/growth_beacon_logo.jpg",
+      "schema:sameAs": [
+        "https://wa.me/918190801030",
+        "https://www.instagram.com/growthbeacon.co/?hl=en",
+        "https://github.com/Prem0304/growth-beacon-website",
+        "https://www.linkedin.com/company/growthbeacon"
+      ],
+      "schema:knowsAbout": [
+        {
+          "@type": "schema:DefinedTerm",
+          "@id": "https://www.wikidata.org/wiki/Q389066",
+          "schema:name": "Digital Marketing"
+        },
+        {
+          "@type": "schema:DefinedTerm",
+          "@id": "https://www.wikidata.org/wiki/Q180711",
+          "schema:name": "Search Engine Optimization"
+        },
+        {
+          "@type": "schema:DefinedTerm",
+          "@id": "https://www.wikidata.org/wiki/Q1126157",
+          "schema:name": "Pay-Per-Click"
+        }
+      ],
+      "schema:address": {
+        "@type": "schema:PostalAddress",
+        "schema:streetAddress": "Bodinayakanur",
+        "schema:addressLocality": "Theni",
+        "schema:addressRegion": "Tamil Nadu",
+        "schema:postalCode": "625513",
+        "schema:addressCountry": "IN"
+      }
+    }
+  ]
+}
