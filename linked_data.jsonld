@@ -42,6 +42,37 @@
         "schema:addressRegion": "Tamil Nadu",
         "schema:postalCode": "625513",
         "schema:addressCountry": "IN"
+      },
+      "schema:areaServed": [
+        {
+          "@type": "schema:AdministrativeArea",
+          "schema:name": "Tamil Nadu",
+          "schema:sameAs": "https://www.wikidata.org/wiki/Q1445"
+        },
+        {
+          "@type": "schema:Place",
+          "schema:name": "Theni District",
+          "schema:sameAs": "https://www.wikidata.org/wiki/Q15392"
+        },
+        {
+          "@type": "schema:Country",
+          "schema:name": "India",
+          "schema:sameAs": "https://www.wikidata.org/wiki/Q668"
+        }
+      ],
+      "schema:hasOfferCatalog": {
+        "@type": "schema:OfferCatalog",
+        "schema:name": "Digital Marketing Services in Theni",
+        "schema:itemListElement": [
+          {
+            "@type": "schema:Offer",
+            "schema:itemOffered": {
+              "@type": "schema:Service",
+              "schema:name": "Digital Marketing Agency in Theni",
+              "schema:url": "https://growthbeacon.co.in/locations/digital-marketing-agency-in-theni/"
+            }
+          }
+        ]
       }
     }
   ]

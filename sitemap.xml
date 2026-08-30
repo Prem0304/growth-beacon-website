@@ -132,8 +132,14 @@
 
   <!-- Location Pages -->
   <url>
+    <loc>https://growthbeacon.co.in/locations/digital-marketing-agency-in-theni/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
     <loc>https://growthbeacon.co.in/locations/theni/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-08-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
