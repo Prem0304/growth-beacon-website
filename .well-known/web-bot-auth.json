@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "specification": "RFC 9421 - HTTP Message Signatures",
+  "bot_auth_enabled": true,
+  "algorithms_supported": [
+    "ed25519",
+    "rsa-sha256",
+    "ecdsa-p256-sha256"
+  ],
+  "required_signature_components": [
+    "@method",
+    "@target-uri",
+    "content-digest",
+    "date"
+  ],
+  "headers_required": [
+    "Signature-Input",
+    "Signature",
+    "Content-Digest",
+    "Date"
+  ],
+  "jwks_uri": "https://growthbeacon.co.in/.well-known/jwks.json",
+  "documentation": "https://growthbeacon.co.in/web-bot-auth.md",
+  "verification_endpoint": "https://app.growthbeacon.co.in/api/v1/auth/verify-signature"
+}

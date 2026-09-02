@@ -64,6 +64,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
+  // Web Bot Auth Request Signing Helper (RFC 9421 HTTP Message Signatures)
+  // ==========================================================================
+  window.GrowthBeaconBotAuth = {
+    computeContentDigest: async (bodyText) => {
+      if (!window.crypto || !window.crypto.subtle) return null;
+      const encoder = new TextEncoder();
+      const data = encoder.encode(bodyText || "");
+      const hashBuffer = await window.crypto.subtle.digest("SHA-256", data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const base64Hash = btoa(String.fromCharCode.apply(null, hashArray));
+      return `sha-256=:${base64Hash}:`;
+    },
+    createSignatureInputHeader: (keyId = "gb-bot-auth-key-2026") => {
+      const created = Math.floor(Date.now() / 1000);
+      return `sig1=("@method" "@target-uri" "content-digest" "date");created=${created};keyid="${keyId}";alg="ed25519"`;
+    }
+  };
+
+  // ==========================================================================
   // Header scroll effect
   // ==========================================================================
   const header = document.querySelector('.header');

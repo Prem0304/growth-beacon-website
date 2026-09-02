@@ -10,12 +10,24 @@
         {
           "href": "https://growthbeacon.co.in/auth.md",
           "type": "text/markdown"
+        },
+        {
+          "href": "https://growthbeacon.co.in/web-bot-auth.md",
+          "type": "text/markdown"
         }
       ],
       "service-desc": [
         {
           "href": "https://growthbeacon.co.in/.well-known/api-catalog",
           "type": "application/linkset+json"
+        },
+        {
+          "href": "https://growthbeacon.co.in/.well-known/web-bot-auth.json",
+          "type": "application/json"
+        },
+        {
+          "href": "https://growthbeacon.co.in/.well-known/jwks.json",
+          "type": "application/json"
         },
         {
           "href": "https://growthbeacon.co.in/.well-known/oauth-authorization-server",
