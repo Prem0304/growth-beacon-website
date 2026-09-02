@@ -8,7 +8,7 @@
           "type": "text/markdown"
         },
         {
-          "href": "https://growthbeacon.co.in/llms-full.txt",
+          "href": "https://growthbeacon.co.in/auth.md",
           "type": "text/markdown"
         }
       ],
@@ -18,7 +18,19 @@
           "type": "application/linkset+json"
         },
         {
-          "href": "https://growthbeacon.co.in/.well-known/agent-configuration.json",
+          "href": "https://growthbeacon.co.in/.well-known/oauth-authorization-server",
+          "type": "application/json"
+        },
+        {
+          "href": "https://growthbeacon.co.in/.well-known/oauth-protected-resource",
+          "type": "application/json"
+        },
+        {
+          "href": "https://growthbeacon.co.in/.well-known/mcp/server-card.json",
+          "type": "application/json"
+        },
+        {
+          "href": "https://growthbeacon.co.in/.well-known/agent-skills/index.json",
           "type": "application/json"
         }
       ],

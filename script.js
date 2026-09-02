@@ -3,6 +3,67 @@ document.documentElement.classList.add('js');
 document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================================================
+  // WebMCP In-Browser Tool Registration (Model Context Protocol for Browsers)
+  // ==========================================================================
+  if (typeof navigator !== 'undefined' && navigator.modelContext) {
+    try {
+      const provideCtx = navigator.modelContext.provideContext || navigator.modelContext.registerTool;
+      if (typeof provideCtx === 'function') {
+        provideCtx.call(navigator.modelContext, {
+          tools: [
+            {
+              name: "submitLeadEnquiry",
+              description: "Submits a digital marketing strategy enquiry or audit request to Growth Beacon",
+              parameters: {
+                type: "object",
+                properties: {
+                  name: { type: "string", description: "Contact person name" },
+                  email: { type: "string", description: "Business email" },
+                  phone: { type: "string", description: "Phone or WhatsApp number" },
+                  company: { type: "string", description: "Company or business name" },
+                  service: { type: "string", description: "Interested service" },
+                  message: { type: "string", description: "Business goals" }
+                },
+                required: ["name", "email", "phone"]
+              },
+              execute: async (args) => {
+                const apiEndpoint = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
+                  ? "/api/v1/leads/public-enquiry" 
+                  : "https://app.growthbeacon.co.in/api/v1/leads/public-enquiry";
+                const response = await fetch(apiEndpoint, {
+                  method: "POST",
+                  headers: { 
+                    "Content-Type": "application/json",
+                    "X-Idempotency-Key": "webmcp_" + Date.now() + "_" + Math.random().toString(36).substring(2, 9)
+                  },
+                  body: JSON.stringify(args)
+                });
+                return await response.json();
+              }
+            },
+            {
+              name: "getAgencyCapabilities",
+              description: "Retrieves Growth Beacon performance marketing services, local hubs, and contact details",
+              parameters: { type: "object", properties: {} },
+              execute: async () => {
+                return {
+                  agency: "Growth Beacon Digital Marketing Agency",
+                  website: "https://growthbeacon.co.in",
+                  phone: "+91 8190801030",
+                  location: "Bodinayakanur, Theni, Tamil Nadu - 625513",
+                  services: ["SEO", "Google PPC Ads", "Meta Ads", "Web Development", "Google Maps Local SEO", "WhatsApp Automation"]
+                };
+              }
+            }
+          ]
+        });
+      }
+    } catch (err) {
+      console.log("WebMCP Registration Note:", err);
+    }
+  }
+
+  // ==========================================================================
   // Header scroll effect
   // ==========================================================================
   const header = document.querySelector('.header');

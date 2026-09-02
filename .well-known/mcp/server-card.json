@@ -1,0 +1,76 @@
+{
+  "serverInfo": {
+    "name": "growth-beacon-mcp-server",
+    "version": "1.0.0",
+    "description": "Model Context Protocol (MCP) server for Growth Beacon Digital Marketing Agency"
+  },
+  "transport": {
+    "type": "sse",
+    "url": "https://app.growthbeacon.co.in/mcp/sse"
+  },
+  "capabilities": {
+    "tools": {
+      "listChanged": true
+    },
+    "resources": {
+      "subscribe": true,
+      "listChanged": true
+    },
+    "prompts": {
+      "listChanged": true
+    }
+  },
+  "tools": [
+    {
+      "name": "submit_lead_enquiry",
+      "description": "Submits a new business lead or digital marketing strategy inquiry to Growth Beacon CRM",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Full name of prospect"
+          },
+          "email": {
+            "type": "string",
+            "description": "Contact email address"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Contact phone or WhatsApp number"
+          },
+          "company": {
+            "type": "string",
+            "description": "Company or business name"
+          },
+          "service": {
+            "type": "string",
+            "description": "Interested agency service (e.g. SEO, Google Ads, Meta Ads, Web Dev)"
+          },
+          "message": {
+            "type": "string",
+            "description": "Inquiry message or business goals"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "phone"
+        ]
+      }
+    },
+    {
+      "name": "get_agency_services",
+      "description": "Retrieves the complete list of digital marketing services, pricing tiers, and local hubs",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Filter category: seo, google-ads, meta-ads, web-dev, local-maps"
+          }
+        }
+      }
+    }
+  ]
+}

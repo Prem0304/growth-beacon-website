@@ -1,0 +1,15 @@
+{
+  "resource": "https://growthbeacon.co.in/api/v1/",
+  "authorization_servers": [
+    "https://growthbeacon.co.in"
+  ],
+  "scopes_supported": [
+    "leads:write",
+    "audit:read",
+    "services:read"
+  ],
+  "bearer_methods_supported": [
+    "header"
+  ],
+  "resource_documentation": "https://growthbeacon.co.in/auth.md"
+}

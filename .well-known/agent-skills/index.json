@@ -1,0 +1,34 @@
+{
+  "version": "1.0",
+  "agency": "Growth Beacon Digital Marketing Agency",
+  "skills": [
+    {
+      "id": "digital-presence-audit",
+      "name": "Audit Digital Presence",
+      "description": "Evaluates technical SEO, site speed, and Google Business Profile local rank positioning for Tamil Nadu businesses",
+      "endpoint": "https://growthbeacon.co.in/locations/digital-marketing-agency-in-theni/",
+      "method": "GET"
+    },
+    {
+      "id": "submit-lead-enquiry",
+      "name": "Submit Lead Enquiry",
+      "description": "Submits business growth request or audit inquiry directly to Growth Beacon CRM API",
+      "endpoint": "https://app.growthbeacon.co.in/api/v1/leads/public-enquiry",
+      "method": "POST"
+    },
+    {
+      "id": "fetch-service-catalog",
+      "name": "Fetch Service Catalog",
+      "description": "Retrieves performance marketing service packages, SEO roadmaps, and pricing models",
+      "endpoint": "https://growthbeacon.co.in/services/",
+      "method": "GET"
+    },
+    {
+      "id": "local-hub-lookup",
+      "name": "Lookup Local Hubs",
+      "description": "Retrieves service coverage areas across Theni, Madurai, Dindigul, and Coimbatore",
+      "endpoint": "https://growthbeacon.co.in/locations/",
+      "method": "GET"
+    }
+  ]
+}
