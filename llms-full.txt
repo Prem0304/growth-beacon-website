@@ -1,0 +1,56 @@
+# Growth Beacon — Full Machine-Readable Knowledge Base & System Documentation
+
+> Complete technical and operational specification of Growth Beacon Digital Marketing Agency for AI Assistants, LLM Crawlers, and Autonomous Search Agents.
+
+## 1. Agency Master Profile
+- **Legal Entity Name**: Growth Beacon
+- **Industry Classification**: Performance Digital Marketing Agency & Software Development Consultancy
+- **Headquarters Address**: Bodinayakanur Main Road, Theni District, Tamil Nadu - 625513, India
+- **Coordinates**: Latitude 10.0104, Longitude 77.4768 (Theni)
+- **Phone**: +91 8190801030
+- **Email**: growth@growthbeacon.co.in
+- **Official Canonical Domain**: https://growthbeacon.co.in/
+
+## 2. Core Service Ecosystem
+
+### Search Engine Optimization (SEO)
+URL: https://growthbeacon.co.in/services/seo/
+- On-page keyword optimization, technical Core Web Vitals audit, Schema.org JSON-LD structured data implementation, local backlink acquisition, and keyword rank growth.
+
+### Google Search PPC Ads
+URL: https://growthbeacon.co.in/services/google-ads/
+- High-intent Google Search PPC ad campaigns, negative keyword management, conversion extension setup, landing page optimization, and target Cost-Per-Acquisition (CPA) tuning.
+
+### Meta Advertising (Facebook & Instagram Ads)
+URL: https://growthbeacon.co.in/services/meta-ads/
+- Demographic and interest-targeted Meta Ads, video creative production, Meta Pixel tracking, lookalike audience expansion, and high-ROAS lead generation funnels.
+
+### Google Business Profile & Local Maps Optimization
+URL: https://growthbeacon.co.in/services/google-business-profile-optimization/
+- Top 3 Google Maps local pack optimization, GMB audit, geotagged citation building, review automation, and local customer lead call tracking across Theni and South Tamil Nadu.
+
+### Custom Website Development
+URL: https://growthbeacon.co.in/services/website-development/
+- Custom high-speed mobile-first web engineering, W3C HTML5 compliance, glassmorphism design, e-commerce development (WooCommerce/Shopify), and custom CRM lead integration.
+
+### WhatsApp Marketing & Automation
+URL: https://growthbeacon.co.in/services/whatsapp-marketing/
+- Official WhatsApp Business API chatbots, automated lead response workflows, broadcast campaigns, and direct customer engagement systems.
+
+## 3. Location Hubs & Coverage
+
+- **Theni Headquarters Hub**: https://growthbeacon.co.in/locations/theni/
+- **Digital Marketing Agency in Theni**: https://growthbeacon.co.in/locations/digital-marketing-agency-in-theni/
+- **Dindigul Service Area**: https://growthbeacon.co.in/locations/dindigul/
+- **Madurai Service Area**: https://growthbeacon.co.in/locations/madurai/
+- **Coimbatore Service Area**: https://growthbeacon.co.in/locations/coimbatore/
+- **South Tamil Nadu Region**: https://growthbeacon.co.in/locations/south-tamil-nadu/
+
+## 4. Machine Discovery & API Catalog Links
+
+- **LLM Summary**: https://growthbeacon.co.in/llms.txt
+- **Markdown Root**: https://growthbeacon.co.in/index.md
+- **API Catalog (RFC 9264 Linkset)**: https://growthbeacon.co.in/.well-known/api-catalog
+- **Agent Configuration**: https://growthbeacon.co.in/.well-known/agent-configuration.json
+- **Security Policy**: https://growthbeacon.co.in/.well-known/security.txt
+- **DNS Agent Discovery Record**: `_index._agents.growthbeacon.co.in`

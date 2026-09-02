@@ -1,0 +1,19 @@
+; DNS Agent Index & Discovery (DNS-AID) Zone Records for growthbeacon.co.in
+; Purpose: Enables autonomous AI agents to discover site services, API catalog, and LLM text endpoints via DNS.
+
+$ORIGIN growthbeacon.co.in.
+$TTL 3600
+
+; 1. Primary DNS-AID HTTPS Service Record under _index._agents
+_index._agents.growthbeacon.co.in.  IN  HTTPS  1 . (
+    alpn="h2,h3"
+    port="443"
+    ipv4hint=185.199.108.153,185.199.109.153,185.199.110.153,185.199.111.153
+    key6="/llms.txt"
+)
+
+; 2. DNS-AID Machine-Readable TXT Fallback Record
+_index._agents.growthbeacon.co.in.  IN  TXT  "v=aid1; uri=https://growthbeacon.co.in/llms.txt; catalog=https://growthbeacon.co.in/.well-known/api-catalog; agent-config=https://growthbeacon.co.in/.well-known/agent-configuration.json"
+
+; 3. General Agent Endpoint Subdomain Discovery
+_agent._domainkey.growthbeacon.co.in. IN TXT "v=AID1; service=digital-marketing-agency; loc=Theni,TN,IN"

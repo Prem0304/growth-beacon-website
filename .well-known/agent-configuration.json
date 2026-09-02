@@ -1,0 +1,19 @@
+{
+  "schema_version": "v1",
+  "name_for_model": "growth_beacon",
+  "name_for_human": "Growth Beacon Digital Marketing Agency",
+  "description_for_model": "Growth Beacon is a premier performance digital marketing agency headquartered in Bodinayakanur, Theni, Tamil Nadu, India. Specializing in Search Engine Optimization (SEO), Google Search Ads (PPC), Meta Ads (Facebook & Instagram Ads), Custom Web Development, and Google Maps Local SEO.",
+  "description_for_human": "Growth Beacon delivers revenue-focused digital marketing, SEO, Google Ads, Meta Ads, and custom web development.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://growthbeacon.co.in/.well-known/api-catalog"
+  },
+  "logo_url": "https://growthbeacon.co.in/assets/growth_beacon_logo.jpg",
+  "contact_email": "growth@growthbeacon.co.in",
+  "legal_info_url": "https://growthbeacon.co.in/privacy-policy/",
+  "llms_txt_url": "https://growthbeacon.co.in/llms.txt",
+  "dns_aid_record": "_index._agents.growthbeacon.co.in"
+}

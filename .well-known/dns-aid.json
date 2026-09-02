@@ -1,0 +1,18 @@
+{
+  "version": "aid1",
+  "domain": "growthbeacon.co.in",
+  "dns_record": "_index._agents.growthbeacon.co.in",
+  "record_type": "HTTPS / SVCB / TXT",
+  "endpoints": {
+    "llms_txt": "https://growthbeacon.co.in/llms.txt",
+    "llms_full_txt": "https://growthbeacon.co.in/llms-full.txt",
+    "api_catalog": "https://growthbeacon.co.in/.well-known/api-catalog",
+    "agent_configuration": "https://growthbeacon.co.in/.well-known/agent-configuration.json",
+    "markdown_root": "https://growthbeacon.co.in/index.md"
+  },
+  "service_info": {
+    "name": "Growth Beacon Digital Marketing Agency",
+    "location": "Bodinayakanur, Theni, Tamil Nadu, India",
+    "coordinates": "10.0104, 77.4768"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://growthbeacon.co.in/",
+      "describedby": [
+        {
+          "href": "https://growthbeacon.co.in/llms.txt",
+          "type": "text/markdown"
+        },
+        {
+          "href": "https://growthbeacon.co.in/llms-full.txt",
+          "type": "text/markdown"
+        }
+      ],
+      "service-desc": [
+        {
+          "href": "https://growthbeacon.co.in/.well-known/api-catalog",
+          "type": "application/linkset+json"
+        },
+        {
+          "href": "https://growthbeacon.co.in/.well-known/agent-configuration.json",
+          "type": "application/json"
+        }
+      ],
+      "sitemap": [
+        {
+          "href": "https://growthbeacon.co.in/sitemap.xml",
+          "type": "application/xml"
+        }
+      ]
+    }
+  ]
+}

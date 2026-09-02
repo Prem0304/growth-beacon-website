@@ -26,6 +26,14 @@
         {
           "key": "Access-Control-Allow-Origin",
           "value": "*"
+        },
+        {
+          "key": "Link",
+          "value": "</llms.txt>; rel=\"describedby\"; type=\"text/markdown\", </.well-known/api-catalog>; rel=\"service-desc\"; type=\"application/linkset+json\", </sitemap.xml>; rel=\"sitemap\"; type=\"application/xml\", </.well-known/agent-configuration.json>; rel=\"agent-configuration\"; type=\"application/json\""
+        },
+        {
+          "key": "Vary",
+          "value": "Accept, Accept-Encoding"
         }
       ]
     }
