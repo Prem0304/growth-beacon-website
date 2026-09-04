@@ -83,6 +83,17 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // ==========================================================================
+  // Email Address Protection & Anti-Spam Harvester Handler
+  // ==========================================================================
+  document.querySelectorAll('.email-protect, [data-email-user]').forEach(elem => {
+    elem.addEventListener('click', (e) => {
+      const user = elem.getAttribute('data-email-user') || 'growth';
+      const domain = elem.getAttribute('data-email-domain') || 'growthbeacon.co.in';
+      window.location.href = `mailto:${user}@${domain}`;
+    });
+  });
+
+  // ==========================================================================
   // Header scroll effect
   // ==========================================================================
   const header = document.querySelector('.header');
