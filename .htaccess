@@ -1,0 +1,10 @@
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Link "</llms.txt>; rel=\"describedby\"; type=\"text/markdown\", </.well-known/api-catalog>; rel=\"service-desc\"; type=\"application/linkset+json\", </sitemap.xml>; rel=\"sitemap\"; type=\"application/xml\", </.well-known/agent-configuration.json>; rel=\"agent-configuration\"; type=\"application/json\""
+    Header always set Vary "Accept, Accept-Encoding"
+</IfModule>

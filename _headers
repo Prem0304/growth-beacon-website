@@ -1,0 +1,9 @@
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Access-Control-Allow-Origin: *
+  Link: </llms.txt>; rel="describedby"; type="text/markdown", </.well-known/api-catalog>; rel="service-desc"; type="application/linkset+json", </sitemap.xml>; rel="sitemap"; type="application/xml", </.well-known/agent-configuration.json>; rel="agent-configuration"; type="application/json"
+  Vary: Accept, Accept-Encoding
