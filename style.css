@@ -3199,4 +3199,198 @@ html.js .animate-card.visible {
   }
 }
 
+/* ==========================================================================
+   Floating WhatsApp Chat Widget & Instant Quick Call Bar
+   ========================================================================== */
+/* Floating Phone Call Widget */
+.floating-call-btn {
+  position: fixed !important;
+  bottom: 95px !important;
+  right: 25px !important;
+  width: 60px !important;
+  height: 60px !important;
+  background: linear-gradient(135deg, #00F0FF 0%, #0072FF 100%) !important;
+  color: #FFFFFF !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 8px 25px rgba(0, 240, 255, 0.45) !important;
+  z-index: 999999 !important;
+  text-decoration: none !important;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.floating-call-btn:hover {
+  transform: scale(1.12) !important;
+  box-shadow: 0 12px 35px rgba(0, 240, 255, 0.7) !important;
+  color: #FFFFFF !important;
+}
+
+.floating-call-btn svg {
+  width: 28px !important;
+  height: 28px !important;
+  stroke: #FFFFFF !important;
+}
+
+.floating-call-pulse {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 2px solid #00F0FF;
+  border-radius: 50%;
+  animation: callPulse 2s infinite;
+  pointer-events: none;
+}
+
+@keyframes callPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+.call-tooltip {
+  position: absolute;
+  right: 72px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #070B19;
+  color: #E2E8F0;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.floating-call-btn:hover .call-tooltip {
+  opacity: 1;
+}
+
+/* Floating WhatsApp Button */
+.floating-whatsapp-btn {
+  position: fixed !important;
+  bottom: 25px !important;
+  right: 25px !important;
+  width: 60px !important;
+  height: 60px !important;
+  background-color: #25D366 !important;
+  color: #FFFFFF !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5) !important;
+  z-index: 999999 !important;
+  text-decoration: none !important;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.floating-whatsapp-btn:hover {
+  transform: scale(1.12) !important;
+  box-shadow: 0 12px 35px rgba(37, 211, 102, 0.7) !important;
+  color: #FFFFFF !important;
+}
+
+.floating-whatsapp-btn svg {
+  width: 34px !important;
+  height: 34px !important;
+  fill: currentColor !important;
+}
+
+.floating-whatsapp-pulse {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 2px solid #25D366;
+  border-radius: 50%;
+  animation: whatsappPulse 2s infinite;
+  pointer-events: none;
+}
+
+@keyframes whatsappPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+.whatsapp-tooltip {
+  position: absolute;
+  right: 72px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #070B19;
+  color: #E2E8F0;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.floating-whatsapp-btn:hover .whatsapp-tooltip {
+  opacity: 1;
+}
+
+/* Mobile Quick Call Nav Highlight */
+.mobile-nav-call {
+  color: #00F0FF !important;
+}
+
+.mobile-nav-call .mobile-nav-icon {
+  stroke: #00F0FF !important;
+}
+
+/* Mobile Quick Call Floating Bar */
+@media (max-width: 768px) {
+  .floating-whatsapp-btn {
+    bottom: 85px !important;
+    right: 18px !important;
+    width: 54px !important;
+    height: 54px !important;
+  }
+  
+  .floating-whatsapp-btn svg {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .floating-call-btn {
+    bottom: 148px !important;
+    right: 18px !important;
+    width: 54px !important;
+    height: 54px !important;
+  }
+
+  .floating-call-btn svg {
+    width: 26px !important;
+    height: 26px !important;
+  }
+}
+
+
 

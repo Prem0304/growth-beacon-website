@@ -823,4 +823,31 @@ document.addEventListener('DOMContentLoaded', () => {
       sections.forEach(sec => sectionObserver.observe(sec));
     }
   }
+
+  // ==========================================================================
+  // GA4 Event Tracking for Instant Phone Calls & WhatsApp Engagement
+  // ==========================================================================
+  document.querySelectorAll('a[href*="wa.me"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (typeof gtag === 'function') {
+        gtag('event', 'whatsapp_click', {
+          'event_category': 'Engagement',
+          'event_label': 'Floating WhatsApp Widget',
+          'value': 1
+        });
+      }
+    });
+  });
+
+  document.querySelectorAll('a[href^="tel:"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (typeof gtag === 'function') {
+        gtag('event', 'phone_call_click', {
+          'event_category': 'Engagement',
+          'event_label': 'Mobile Quick Call',
+          'value': 1
+        });
+      }
+    });
+  });
 });
