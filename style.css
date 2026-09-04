@@ -3365,30 +3365,11 @@ html.js .animate-card.visible {
   stroke: #00F0FF !important;
 }
 
-/* Mobile Quick Call Floating Bar */
+/* Hide floating action widgets on mobile screens (< 768px) */
 @media (max-width: 768px) {
-  .floating-whatsapp-btn {
-    bottom: 85px !important;
-    right: 18px !important;
-    width: 54px !important;
-    height: 54px !important;
-  }
-  
-  .floating-whatsapp-btn svg {
-    width: 30px !important;
-    height: 30px !important;
-  }
-
+  .floating-whatsapp-btn,
   .floating-call-btn {
-    bottom: 148px !important;
-    right: 18px !important;
-    width: 54px !important;
-    height: 54px !important;
-  }
-
-  .floating-call-btn svg {
-    width: 26px !important;
-    height: 26px !important;
+    display: none !important;
   }
 }
 
