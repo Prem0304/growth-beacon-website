@@ -1,0 +1,13 @@
+# Growth Beacon — Authorized Digital Sellers (IAB Tech Lab ads.txt Specification v1.1)
+# Domain: growthbeacon.co.in
+# Owner: Growth Beacon Digital Marketing Agency
+# Contact: growth@growthbeacon.co.in
+
+OWNERDOMAIN=growthbeacon.co.in
+CONTACT=growth@growthbeacon.co.in
+
+# Google AdSense / Google Ad Manager Authorized Direct Publisher
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+
+# Meta Audience Network Authorized Direct Publisher
+facebook.com, 0000000000000000, DIRECT, c3e20e3d64a02930

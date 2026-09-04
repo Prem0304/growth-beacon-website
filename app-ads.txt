@@ -1,0 +1,10 @@
+# Growth Beacon — Authorized Mobile App Digital Sellers (IAB Tech Lab app-ads.txt Specification v1.1)
+# Domain: growthbeacon.co.in
+# Owner: Growth Beacon Digital Marketing Agency
+# Contact: growth@growthbeacon.co.in
+
+OWNERDOMAIN=growthbeacon.co.in
+CONTACT=growth@growthbeacon.co.in
+
+# Google AdManager / AdMob Authorized Direct Publisher
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
