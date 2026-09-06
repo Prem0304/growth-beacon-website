@@ -1,47 +1,46 @@
-# Growth Beacon — Machine-Readable Entity Summary
+# Growth Beacon
 
-> Growth Beacon is an independent performance digital marketing agency headquartered in Bodinayakanur, Theni, Tamil Nadu, India (ZIP: 625513). We specialize in Search Engine Optimization (SEO), Google Search Ads (PPC), Meta Advertising (Facebook & Instagram Ads), Social Media Management, Custom Website Development, Branding, and Lead Automation for commercial enterprises across South Tamil Nadu.
+> Growth Beacon is an independent performance digital marketing agency headquartered in Bodinayakanur, Theni, Tamil Nadu, India (ZIP: 625513, Phone: +91 8190801030). We specialize in Search Engine Optimization (SEO), Google Search PPC Ads, Meta Advertising (Facebook & Instagram Ads), Social Media Management, Custom Website Development, Branding, Local Maps Optimization, and Lead Automation for commercial enterprises across South Tamil Nadu.
 
-## Core Entity Details
-- Business Name: Growth Beacon
-- Sole Physical Location: Bodinayakanur, Theni, Tamil Nadu - 625513, India
-- Phone: +91 8190801030
-- Email: growth@growthbeacon.co.in
-- Website: https://growthbeacon.co.in/
-- Primary Service Areas: Theni, Dindigul, Madurai, Coimbatore, South Tamil Nadu
+## Core Pages
 
-## Key Site Resources & Canonical URLs
+- [Homepage](https://growthbeacon.co.in/): #1 Digital Marketing Agency in Theni & South Tamil Nadu providing SEO, Google Ads, Meta Ads, and web design.
+- [About Growth Beacon](https://growthbeacon.co.in/about/): Agency background, leadership team (founders Premkumar & Ram), and performance marketing philosophy.
+- [Contact Growth Beacon](https://growthbeacon.co.in/contact/): Direct phone (+91 8190801030), email (contact@growthbeacon.co.in), office location in Bodinayakanur, Theni, and free audit inquiry form.
+- [Privacy Policy](https://growthbeacon.co.in/privacy-policy/): Privacy policy and data handling guidelines.
+- [Terms and Conditions](https://growthbeacon.co.in/terms-and-conditions/): Legal terms of service and website usage agreement.
 
-### Primary Pages
-- Homepage: https://growthbeacon.co.in/
-- About Growth Beacon: https://growthbeacon.co.in/about/
-- Contact Us: https://growthbeacon.co.in/contact/
-- Privacy Policy: https://growthbeacon.co.in/privacy-policy/
-- Terms & Conditions: https://growthbeacon.co.in/terms-and-conditions/
+## Services
 
-### Core Growth Services
-- SEO Services: https://growthbeacon.co.in/services/seo/
-- Google Search Ads (PPC): https://growthbeacon.co.in/services/google-ads/
-- Meta Advertising (FB & IG): https://growthbeacon.co.in/services/meta-ads/
-- Social Media Marketing: https://growthbeacon.co.in/services/social-media-marketing/
-- Custom Website Development: https://growthbeacon.co.in/services/website-development/
-- Google Maps & Local SEO: https://growthbeacon.co.in/services/google-business-profile-optimization/
-- Branding & Visual Identity: https://growthbeacon.co.in/services/branding/
-- Video Reels & Marketing: https://growthbeacon.co.in/services/video-marketing/
-- WhatsApp Marketing Automation: https://growthbeacon.co.in/services/whatsapp-marketing/
-- CRM Automation & Integration: https://growthbeacon.co.in/services/crm-automation/
+- [Search Engine Optimization (SEO)](https://growthbeacon.co.in/services/seo/): Data-driven SEO services to rank #1 on Google for local and regional search keywords.
+- [Google Search Ads (PPC)](https://growthbeacon.co.in/services/google-ads/): High-intent Google Search PPC ad campaigns for immediate sales leads and ROI.
+- [Meta Advertising (Facebook & Instagram Ads)](https://growthbeacon.co.in/services/meta-ads/): Targeted Meta ad campaigns, video creatives, and high-ROAS lead generation funnels.
+- [Custom Website Development](https://growthbeacon.co.in/services/website-development/): High-speed, responsive, mobile-first web engineering with glassmorphism UI/UX.
+- [Google Maps & Local SEO](https://growthbeacon.co.in/services/google-business-profile-optimization/): Top 3 Google Maps local pack optimization and Google Business Profile management.
+- [WhatsApp Marketing Automation](https://growthbeacon.co.in/services/whatsapp-marketing/): Official WhatsApp Business API chatbots, automated lead response, and broadcasts.
+- [CRM Automation & Lead Tracking](https://growthbeacon.co.in/services/crm-automation/): Multi-channel lead capture, automated CRM workflows, and sales tracking.
+- [Branding & Visual Identity](https://growthbeacon.co.in/services/branding/): Strategic brand identity design, logo creation, and market positioning.
+- [Video & Reels Marketing](https://growthbeacon.co.in/services/video-marketing/): High-converting promo videos, short-form Reels, and video ad production.
+- [Social Media Marketing](https://growthbeacon.co.in/services/social-media-marketing/): Social media strategy, content publishing, and brand audience growth.
 
-### Regional Service Area Hubs
-- Theni Head Office Hub: https://growthbeacon.co.in/locations/theni/
-- Dindigul Service Area: https://growthbeacon.co.in/locations/dindigul/
-- Madurai Service Area: https://growthbeacon.co.in/locations/madurai/
-- Coimbatore Service Area: https://growthbeacon.co.in/locations/coimbatore/
-- South Tamil Nadu Hub: https://growthbeacon.co.in/locations/south-tamil-nadu/
+## Regional Service Areas
 
-### Knowledge Hub & Insights
-- Knowledge Hub Index: https://growthbeacon.co.in/blog/
-- How SEO Helps Small Businesses in Theni: https://growthbeacon.co.in/blog/how-seo-helps-small-businesses-in-theni/
-- How to Get More Customers From Google Maps in Theni: https://growthbeacon.co.in/blog/how-to-get-more-customers-from-google-maps-in-theni/
-- SEO vs Google Ads for Small Business: https://growthbeacon.co.in/blog/seo-vs-google-ads-for-small-business/
-- Digital Marketing Cost in Tamil Nadu: https://growthbeacon.co.in/blog/how-much-does-digital-marketing-cost-in-tamil-nadu/
-- How Local SEO Helps Businesses in Theni: https://growthbeacon.co.in/blog/how-local-seo-helps-businesses-in-theni/
+- [Theni Headquarters](https://growthbeacon.co.in/locations/theni/): Digital marketing agency headquarters and services in Theni.
+- [Digital Marketing Agency in Theni](https://growthbeacon.co.in/locations/digital-marketing-agency-in-theni/): Specialized local marketing services in Theni.
+- [Madurai Hub](https://growthbeacon.co.in/locations/madurai/): Performance marketing and SEO services for businesses in Madurai.
+- [Dindigul Hub](https://growthbeacon.co.in/locations/dindigul/): Local search optimization and paid ads management in Dindigul.
+- [Coimbatore Hub](https://growthbeacon.co.in/locations/coimbatore/): Web development and digital growth services in Coimbatore.
+- [South Tamil Nadu Regional Hub](https://growthbeacon.co.in/locations/south-tamil-nadu/): Comprehensive digital marketing services across South Tamil Nadu.
+
+## Knowledge Hub & Articles
+
+- [How SEO Helps Small Businesses in Theni](https://growthbeacon.co.in/blog/how-seo-helps-small-businesses-in-theni/): Complete guide to organic search growth for small local businesses.
+- [How to Get More Customers From Google Maps](https://growthbeacon.co.in/blog/how-to-get-more-customers-from-google-maps-in-theni/): Step-by-step Google Maps ranking strategy.
+- [SEO vs Google Ads for Small Business](https://growthbeacon.co.in/blog/seo-vs-google-ads-for-small-business/): Comparison guide between SEO and PPC advertising for maximum ROI.
+- [Digital Marketing Cost in Tamil Nadu](https://growthbeacon.co.in/blog/how-much-does-digital-marketing-cost-in-tamil-nadu/): Transparent pricing benchmark and budget breakdown for digital marketing.
+- [How Local SEO Helps Businesses in Theni](https://growthbeacon.co.in/blog/how-local-seo-helps-businesses-in-theni/): Advanced local SEO techniques for store footfall.
+
+## Optional
+
+- [Full Technical Specification](https://growthbeacon.co.in/llms-full.txt): Complete operational and technical documentation for LLMs and AI crawlers.
+- [Raw Markdown Index](https://growthbeacon.co.in/index.md): Full machine-readable site index in raw Markdown format.
