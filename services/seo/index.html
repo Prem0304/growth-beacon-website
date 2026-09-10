@@ -39,67 +39,68 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Montserrat:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css?v=43">
 
-  <!-- Schema.org Markup for Service & Breadcrumbs & FAQ -->
+  <!-- Schema.org Multi-Type Entity Stacking (Service + OfferCatalog + BreadcrumbList) -->
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
+  "@graph": [
     {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://growthbeacon.co.in/"
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://growthbeacon.co.in/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://growthbeacon.co.in/services/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "✓ Top SEO Company in Theni",
+          "item": "https://growthbeacon.co.in/services/seo/"
+        }
+      ]
     },
     {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Services",
-      "item": "https://growthbeacon.co.in/services/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
+      "@type": "Service",
+      "@id": "https://growthbeacon.co.in/services/seo/#service",
       "name": "✓ Top SEO Company in Theni",
-      "item": "https://growthbeacon.co.in/services/seo/"
-    }
-  ]
-}
-  </script>
-
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "@id": "https://growthbeacon.co.in/services/seo/#service",
-  "name": "✓ Top SEO Company in Theni",
-  "url": "https://growthbeacon.co.in/services/seo/",
-  "serviceType": "Seo",
-  "category": "Digital Marketing",
-  "description": "✓ Top SEO Company in Theni. Rank #1 on Google with technical SEO, local search ranking & keyword optimization. Call +91 81908 01030 for a free audit.",
-  "provider": {
-    "@id": "https://growthbeacon.co.in/#organization"
-  },
-  "areaServed": [
-    {
-      "@type": "AdministrativeArea",
-      "name": "Theni"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Madurai"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Dindigul"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Coimbatore"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Tamil Nadu"
+      "url": "https://growthbeacon.co.in/services/seo/",
+      "serviceType": "Enterprise & Local Search Engine Optimization",
+      "category": "Digital Marketing",
+      "description": "Top SEO Company in Theni & South Tamil Nadu implementing Content Pruning, Barnacle SEO, Reverse Siloing, Content Decay Recovery, Search Intent Splitting, Entity Stacking, Internal Link Sculpting, Programmatic SEO, Digital PR, and Query Fan-Out AI Search Optimization.",
+      "provider": {
+        "@id": "https://growthbeacon.co.in/#organization"
+      },
+      "areaServed": [
+        { "@type": "AdministrativeArea", "name": "Theni" },
+        { "@type": "AdministrativeArea", "name": "Madurai" },
+        { "@type": "AdministrativeArea", "name": "Dindigul" },
+        { "@type": "AdministrativeArea", "name": "Coimbatore" },
+        { "@type": "AdministrativeArea", "name": "South Tamil Nadu" }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "10-Pillar Enterprise SEO Execution Suite",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Content Pruning" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Barnacle SEO" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Reverse Siloing" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Content Decay Recovery" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Search Intent Splitting" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Entity Stacking" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Internal Link Sculpting" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Programmatic SEO (pSEO)" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital PR SEO" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Query Fan-Out Optimization" } }
+        ]
+      }
     }
   ]
 }
@@ -235,7 +236,83 @@
             <p>We optimize NAP consistency (Name, Address, Phone), build targeted local citations, structure geo-tagged imagery, and implement review collection systems to secure top Google Maps rankings.</p>
 
             <h3>5. Transparent Reporting &amp; ROI Tracking</h3>
-            <p>You receive clear monthly reports showing keyword position improvements, organic traffic growth, map interaction metrics, and direct lead submissions.</p>
+          </div>
+
+          <!-- AI Search & Query Fan-Out Direct Answer Snippet -->
+          <div class="ai-answer-box">
+            <div class="ai-answer-box-header">
+              <span class="ai-badge">AI Search Summary</span>
+              <h3 class="ai-answer-title">What makes Growth Beacon's SEO methodology unique?</h3>
+            </div>
+            <p class="ai-answer-desc">Growth Beacon executes a proprietary <strong>10-Pillar Enterprise &amp; Local SEO Framework</strong> that combines technical crawl optimization, multi-type Entity Stacking, Reverse Siloing, and Query Fan-Out Optimization for AI search engines (ChatGPT Search, Perplexity AI, Google AI Overviews). Unlike traditional agencies using static keyword density, we optimize for Knowledge Graph entity recognition, local map pack domination, and long-tail programmatic scaling across South Tamil Nadu.</p>
+          </div>
+
+          <!-- Advanced Enterprise SEO Framework Showcase -->
+          <div class="content-block-card advanced-seo-framework">
+            <h2>Advanced Enterprise SEO Execution Framework</h2>
+            <p>For brands and growth enterprises requiring high-authority search domination, we execute 10 advanced technical and strategic SEO disciplines:</p>
+
+            <div class="seo-pillar-grid">
+              <div class="seo-pillar-card">
+                <span class="seo-pillar-number">01</span>
+                <h3 class="seo-pillar-title">Content Pruning</h3>
+                <p class="seo-pillar-desc">Systematic auditing, consolidation, 301-redirecting, or 410-deleting of underperforming or cannibalizing pages to maximize crawl budget efficiency and concentrate domain authority.</p>
+              </div>
+
+              <div class="seo-pillar-card">
+                <span class="seo-pillar-number">02</span>
+                <h3 class="seo-pillar-title">Barnacle SEO</h3>
+                <p class="seo-pillar-desc">Leveraging high-DA third-party hubs, industry review portals, and Google Business Profiles to occupy multiple Page-1 search results for competitive high-intent terms.</p>
+              </div>
+
+              <div class="seo-pillar-card">
+                <span class="seo-pillar-number">03</span>
+                <h3 class="seo-pillar-title">Reverse Siloing</h3>
+                <p class="seo-pillar-desc">Flowing link equity and contextual authority upward from high-converting transactional pages back to informational pillar guides, establishing robust topical authority hubs.</p>
+              </div>
+
+              <div class="seo-pillar-card">
+                <span class="seo-pillar-number">04</span>
+                <h3 class="seo-pillar-title">Content Decay Recovery</h3>
+                <p class="seo-pillar-desc">Identifying rank degradation in historically top-performing pages and refreshing them with updated entities, statistics, Schema markup, and intent realignments.</p>
+              </div>
+
+              <div class="seo-pillar-card">
+                <span class="seo-pillar-number">05</span>
+                <h3 class="seo-pillar-title">Search Intent Splitting</h3>
+                <p class="seo-pillar-desc">Disambiguating multi-intent queries into separate, hyper-targeted landing pages matching exact Informational, Commercial, Transactional, and Navigational search journeys.</p>
+              </div>
+
+              <div class="seo-pillar-card">
+                <span class="seo-pillar-number">06</span>
+                <h3 class="seo-pillar-title">Entity Stacking</h3>
+                <p class="seo-pillar-desc">Structuring multi-type JSON-LD Schema payloads (`Organization`, `LocalBusiness`, `Service`, `OfferCatalog`) to build undeniable Knowledge Graph and AI Overview recognition.</p>
+              </div>
+
+              <div class="seo-pillar-card">
+                <span class="seo-pillar-number">07</span>
+                <h3 class="seo-pillar-title">Internal Link Sculpting</h3>
+                <p class="seo-pillar-desc">Strategically directing internal PageRank flow using anchor text variations and contextual link placement to funnel maximum authority into priority conversion pages.</p>
+              </div>
+
+              <div class="seo-pillar-card">
+                <span class="seo-pillar-number">08</span>
+                <h3 class="seo-pillar-title">Programmatic SEO (pSEO)</h3>
+                <p class="seo-pillar-desc">Building scalable, dataset-driven landing page architectures for multi-location hubs (`[Service] in [Location]`) with unique canonicals and local schema data.</p>
+              </div>
+
+              <div class="seo-pillar-card">
+                <span class="seo-pillar-number">09</span>
+                <h3 class="seo-pillar-title">Digital PR SEO</h3>
+                <p class="seo-pillar-desc">Earning high-authority editorial press mentions, regional media features, and unlinked brand citations to strengthen domain trust and backlink signals.</p>
+              </div>
+
+              <div class="seo-pillar-card">
+                <span class="seo-pillar-number">10</span>
+                <h3 class="seo-pillar-title">Query Fan-Out Optimization</h3>
+                <p class="seo-pillar-desc">Structuring content with concise direct answer summaries, comparison tables, and structured FAQs optimized for RAG retrieval in ChatGPT Search, Perplexity, and Gemini.</p>
+              </div>
+            </div>
           </div>
 
           <div class="content-block-card">

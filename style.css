@@ -3373,5 +3373,133 @@ html.js .animate-card.visible {
   }
 }
 
+/* ==========================================================================
+   Advanced Enterprise SEO Framework & AI Search Optimization Styles
+   ========================================================================== */
+.ai-answer-box {
+  background: rgba(0, 240, 255, 0.04);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-left: 4px solid var(--cyan-glow);
+  border-radius: 12px;
+  padding: 1.5rem 1.75rem;
+  margin: 1.5rem 0 2rem 0;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.ai-answer-box-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.ai-badge {
+  background: var(--gradient-blue);
+  color: #070B19;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.ai-answer-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--color-white);
+  margin: 0;
+}
+
+.ai-answer-desc {
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.advanced-seo-framework {
+  margin: 2.5rem 0;
+}
+
+.seo-pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.seo-pillar-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.seo-pillar-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-color-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--cyan-glow-shadow);
+}
+
+.seo-pillar-number {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 1.8rem;
+  color: rgba(0, 240, 255, 0.25);
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  line-height: 1;
+}
+
+.seo-pillar-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-white);
+  margin-bottom: 0.6rem;
+  padding-right: 2rem;
+}
+
+.seo-pillar-desc {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.key-takeaways-box {
+  background: rgba(12, 17, 37, 0.7);
+  border: 1px solid rgba(242, 201, 76, 0.3);
+  border-left: 4px solid var(--gold-accent);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.key-takeaways-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--gold-accent);
+  margin-bottom: 0.5rem;
+}
+
+.key-takeaways-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--color-text-main);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+
 
 
